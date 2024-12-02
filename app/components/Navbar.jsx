@@ -70,6 +70,9 @@ export default function Navbar() {
         <Link href="/booking" className="p-2 md:p-4">
           Booking
         </Link>
+        <Link href="/contact" className="p-2 md:p-4">
+          <button>Kontakt</button>
+        </Link>
         <Link href="/profile" className="p-2 md:p-4">
           <button>Min profil</button>
         </Link>
