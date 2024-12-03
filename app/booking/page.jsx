@@ -4,7 +4,7 @@ export default async function Booking() {
   ); // fetch data from Firebase
 
   const dataObject = await response.json(); //convert response to JSON object
-  console.log(dataObject);
+  //console.log(dataObject);
 
   const teams = Object.keys(dataObject).map((key) => {
     return {
@@ -13,7 +13,7 @@ export default async function Booking() {
     };
   });
 
-  console.log(teams);
+  //console.log(teams);
 
   return (
     <main>
