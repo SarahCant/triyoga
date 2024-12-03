@@ -27,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="p-6 fixed top-0">
+    <header className="p-6 fixed top-0 bg-[#FBF9EC] w-full">
       {/* Image tag logo */}
 
       {/* Burger Button - Hidden on md and larger */}
@@ -58,23 +58,25 @@ export default function Navbar() {
           isOpen ? "flex flex-col" : "hidden"
         }`}
       >
-        <Link href="/" className="p-2 md:p-4">
+        <Link href="/" className="p-2 text-black md:p-4">
           Forside
         </Link>
-        <Link href="/about" className="p-2 md:p-4">
+        <Link href="/about" className="p-2 text-black md:p-4">
           Om TriYoga
         </Link>
-        <Link href="/offers" className="p-2 md:p-4">
+        <Link href="/offers" className="p-2 text-black md:p-4">
           Tilbud
         </Link>
-        <Link href="/booking" className="p-2 md:p-4">
+        <Link href="/booking" className="p-2 text-black md:p-4">
           Booking
         </Link>
-        <Link href="/contact" className="p-2 md:p-4">
+        <Link href="/contact" className="p-2 text-black md:p-4">
           <button>Kontakt</button>
         </Link>
-        <Link href="/profile" className="p-2 md:p-4">
-          <button>Min profil</button>
+        <Link href="/profile" className="p-2 text-[#FBF9EC] md:p-4">
+          <button className="bg-[#396238] rounded-3xl py-2 px-5">
+            Min profil
+          </button>
         </Link>
       </nav>
     </header>
