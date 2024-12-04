@@ -1,6 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import {
+  getDatabase,
+  ref,
+  get,
+  query,
+  orderByChild,
+  startAt,
+  endAt,
+} from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,3 +28,29 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+const database = getDatabase(app);
+export const fetchClassesForWeek = async (startDate, endDate) => {
+  const classesRef = ref(database, "teams");
+  const classesQuery = query(
+    classesRef,
+    orderByChild("startDate"),
+    startAt(startDate),
+    endAt(endDate)
+  );
+
+  try {
+    const snapshot = await get(classesQuery);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      //convert object to array + filter for valid dates
+      return Object.values(data).filter(
+        (item) => item.startDate >= startDate && item.startDate <= endDate
+      );
+    }
+    return []; //return empty array if there's no data
+  } catch (error) {
+    console.error("Error fetching classes: ", error);
+    return []; //show errors in console
+  }
+};

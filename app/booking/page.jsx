@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Calendar from "../components/Calendar";
 
 export default async function Booking() {
   const response = await fetch(
@@ -31,7 +32,7 @@ export default async function Booking() {
             “Book” knappen på dette hold. Herefter skal du oprette dig som
             bruger eller logge ind. Så bliver du ført til den endelige
             bookingside. Du kan læse mere om de enkelte tilbud ved at trykke på
-            “Læs mere”.
+            “Læs".
           </p>
           {/* icon section */}
           <section className="flex justify-evenly pt-6 pb-2 -ml-3 -mr-2.5 items-center">
@@ -84,6 +85,10 @@ export default async function Booking() {
           </section>
         </div>
       </div>
+
+      {/* Calendar */}
+      <h1 className="mt-8 mb-3">Kalender</h1>
+      <Calendar />
     </main>
   );
 }
