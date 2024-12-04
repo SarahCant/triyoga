@@ -20,32 +20,34 @@ export default async function Booking() {
   return (
     <main className="md:pt-10">
       <h1 className="pb-4">Booking</h1>
-      {/* text section */}
-      <div className="border-x-8 border-[color:--main]">
-        {/* outer border */}
-        <div className="bg-[color:#F9DDC3] p-4 border-x-8 border-[color:#769975] ">
-          <p>
-            I kalenderen nedenfor, ser du en oversigt over de yogahold og
-            -workshops, som du kan tilmelde dig. For at tilmelde dig et bestemt
-            hold, skal du trykke på “Book” knappen på dette hold. Herefter skal
-            du oprette dig som bruger eller logge ind. Så bliver du ført til den
-            endelige bookingside. Du kan læse mere om de enkelte tilbud ved at
-            trykke på “Læs mere”.
+      {/* outer border */}
+      <div className="border-x-8 border-[color:--main] md:mx-20">
+        {/* text section */}
+        <div className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975]">
+          <p className="leading-7">
+            <strong>I kalenderen nedenfor, </strong>
+            ser du en oversigt over de yogahold og -workshops, som du kan
+            tilmelde dig. For at tilmelde dig et bestemt hold, skal du trykke på
+            “Book” knappen på dette hold. Herefter skal du oprette dig som
+            bruger eller logge ind. Så bliver du ført til den endelige
+            bookingside. Du kan læse mere om de enkelte tilbud ved at trykke på
+            “Læs mere”.
           </p>
           {/* icon section */}
-          <section className="flex justify-evenly py-8 items-center">
+          <section className="flex justify-evenly pt-6 pb-2 -ml-3 -mr-2.5 items-center">
             <div className="flex flex-col justify-center items-center ">
               <Image
                 src="/img/icons/calendar.png"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 alt="Kalender"
               />
-              <p>Vælg hold</p>
+              <p className="leading-5 text-xs">Vælg hold</p>
             </div>
+
             <Image
               src="/img/icons/arrow-black.png"
-              width={30}
+              width={32}
               height={10}
               alt="Pil til højre"
             />
@@ -53,11 +55,11 @@ export default async function Booking() {
             <div className="flex flex-col justify-center items-center text-center">
               <Image
                 src="/img/icons/profile.png"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 alt="Profil"
               />
-              <p>
+              <p className="leading-4 text-xs">
                 Log ind/
                 <br />
                 Opret bruger
@@ -66,18 +68,18 @@ export default async function Booking() {
 
             <Image
               src="/img/icons/arrow-black.png"
-              width={30}
+              width={32}
               height={10}
               alt="Pil til højre"
             />
             <div className="flex flex-col justify-center items-center">
               <Image
                 src="/img/icons/checkmark.png"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 alt="Gennemført"
               />
-              <p>Book</p>
+              <p className="leading-5 text-xs">Book</p>
             </div>
           </section>
         </div>
