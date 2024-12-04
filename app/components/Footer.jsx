@@ -44,8 +44,8 @@ export default function Footer() {
           <Link href="https://www.instagram.com/birgitte_eichild/">
             <Image
               src="/img/icons/ig.png"
-              width={20}
-              height={20}
+              width={40}
+              height={40}
               alt="Instagram"
             ></Image>
           </Link>
