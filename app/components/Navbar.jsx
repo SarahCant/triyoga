@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   // Toggle the burger menu
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    if (window.innerWidth <= 768) {
+      setIsOpen(!isOpen);
+    }
   };
 
   //close burger on larger screens
@@ -29,17 +33,19 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="px-4 py-3 fixed top-0 bg-[#fbf9ec] w-full md:py-2">
+      <header className=" py-3 fixed top-0 bg-[#fbf9ec] w-full md:py-2">
         <div className="flex items-center justify-between md:justify-center">
           {/* Logo */}
           <div>
-            <Image
-              src="/img/logo.png"
-              height={55}
-              width={55}
-              alt="logo"
-              className="md:pt-1"
-            />
+            <Link href="/" onClick={handleClick}>
+              <Image
+                src="/img/logo.png"
+                height={55}
+                width={55}
+                alt="logo"
+                className="pl-4 md:pt-1 md:pl-0"
+              />
+            </Link>
           </div>
           <div>
             {/* Burger Button - Hidden on md and larger */}
@@ -47,7 +53,7 @@ export default function Navbar() {
               onClick={handleClick}
               className="flex flex-col justify-center items-center float-right md:hidden"
             >
-              <div className="flex flex-col items-center w-10">
+              <div className="flex flex-col items-center w-10 pr-4">
                 <div>
                   <span
                     className={`bg-[color:--main] block transition-all duration-300 ease-out h-0.5 w-7 rounded-sm ${
@@ -81,28 +87,78 @@ export default function Navbar() {
             isOpen ? "flex flex-col" : "hidden"
           }`}
         >
-          <Link href="/" className="p-3 pt-5 text-black md:py-1 md:w-36">
+          <Link
+            href="/"
+            onClick={handleClick}
+            className={`p-3 pt-5 text-black active:text-[var(--main)] md:py-1 md:w-36 md:hover:text-[var(--main)] ${
+              pathname === "/"
+                ? "active underline underline-offset-4 text-[var(--main)]"
+                : ""
+            }`}
+          >
             Forside
           </Link>
-          <Link href="/about" className="p-3 text-black md:py-1 md:w-36">
+          <Link
+            href="/about"
+            onClick={handleClick}
+            className={`p-3 pt-5 text-black active:text-[var(--main)] md:py-1 md:w-36 md:hover:text-[var(--main)] ${
+              pathname === "/about"
+                ? "active underline underline-offset-4 text-[var(--main)]"
+                : ""
+            }`}
+          >
             Om TriYoga
           </Link>
-          <Link href="/offers" className="p-3 text-black md:py-1 md:w-36">
+          <Link
+            href="/offers"
+            onClick={handleClick}
+            className={`p-3 pt-5 text-black active:text-[var(--main)] md:py-1 md:w-36 md:hover:text-[var(--main)] ${
+              pathname === "/offers"
+                ? "active underline underline-offset-4 text-[var(--main)]"
+                : ""
+            }`}
+          >
             Tilbud
           </Link>
-          <Link href="/booking" className="p-3 text-black md:py-1 md:w-36">
+          <Link
+            href="/booking"
+            onClick={handleClick}
+            className={`p-3 pt-5 text-black active:text-[var(--main)] md:py-1 md:w-36 md:hover:text-[var(--main)] ${
+              pathname === "/booking"
+                ? "active underline underline-offset-4 text-[var(--main)]"
+                : ""
+            }`}
+          >
             Booking
           </Link>
-          <Link href="/contact" className="p-3 text-black md:py-1 md:w-36">
-            <button>Kontakt</button>
+          <Link
+            href="/contact"
+            onClick={handleClick}
+            className={`p-3 pt-5 text-black active:text-[var(--main)] md:py-1 md:w-36 md:hover:text-[var(--main)] ${
+              pathname === "/contact"
+                ? "active underline underline-offset-4 text-[var(--main)]"
+                : ""
+            }`}
+          >
+            Kontakt
           </Link>
-          <Link href="/profile" className="p-3 text-[#FBF9EC] md:py-1 md:w-36">
-            <button className="bg-[#396238] rounded-3xl py-2 px-5">
+          <Link
+            href="/profile"
+            onClick={handleClick}
+            className="p-3 text-[#FBF9EC] md:py-1 md:w-36"
+          >
+            <button
+              className={`bg-[color:--main] rounded-3xl py-2 px-5 border-solid border-2 border-[color:--main] active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] ${
+                pathname === "/profile"
+                  ? "active bg-[#FBF9EC] text-[var(--main)] border-solid border-2 border-[color:--main] hover:text-[#FBF9EC]"
+                  : ""
+              }`}
+            >
               Min profil
             </button>
           </Link>
         </nav>
-        <span className="bg-[color:--main] block h-0.5 w-full z-10"></span>
+        <span className="bg-[color:--main] block h-0.5 w-full z-10 absolute bottom-0"></span>
       </header>
     </>
   );
