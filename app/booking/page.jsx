@@ -18,12 +18,12 @@ export default async function Booking() {
   //console.log(teams);
 
   return (
-    <main className="px-4 md:pt-10">
-      <h1 className="text-center">Booking</h1>
+    <main className="md:pt-10">
+      <h1 className="pb-4">Booking</h1>
       {/* text section */}
       <div className="border-x-8 border-[color:--main]">
         {/* outer border */}
-        <div className="bg-[color:--orange] p-4 border-x-8 border-[color:#769975] ">
+        <div className="bg-[color:#F9DDC3] p-4 border-x-8 border-[color:#769975] ">
           <p>
             I kalenderen nedenfor, ser du en oversigt over de yogahold og
             -workshops, som du kan tilmelde dig. For at tilmelde dig et bestemt
