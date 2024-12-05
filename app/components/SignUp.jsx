@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase-config";
+//import { useState } from "react";
+//import { createUserWithEmailAndPassword } from "firebase/auth";
+//import { auth } from "../firebase-config";
+import { useActionState, signUpAction } from "react";
 
-export default function SignUp() {
-  const [errorMessage, setErrorMessage] = useState("");
+export default function SignUp({ signUpAction }) {
+  //const [errorMessage, setErrorMessage] = useState("");
+  const [state, formAction] = useActionState(signUpAction, {});
 
-  function handleSignUp(event) {
+  /* function handleSignUp(event) {
     event.preventDefault();
     const form = event.target;
 
@@ -45,12 +47,12 @@ export default function SignUp() {
     } else {
       setErrorMessage("Undskyld, noget gik galt");
     }
-  }
+  } */
 
   return (
     <section id="sign-up" className="page">
       <h1>Opret bruger</h1>
-      <form id="sign-up-form" onSubmit={handleSignUp}>
+      <form id="sign-up-form" action={formAction}>
         <label htmlFor="firstname">Fornavn</label>
         <input
           type="text"
@@ -59,7 +61,7 @@ export default function SignUp() {
           placeholder="Fornavn"
           required
         />
-        <label htmlFor="las-name">Efternavn</label>
+        <label htmlFor="last-name">Efternavn</label>
         <input
           type="text"
           id="lastname"
@@ -68,15 +70,16 @@ export default function SignUp() {
           required
         />
 
-        <label htmlFor="mail">Mail</label>
+        <label htmlFor="email">E-mail</label>
         <input
           type="email"
-          id="mail"
+          id="email"
           name="email"
-          aria-label="mail"
-          placeholder="Mail"
+          defaultValue={state?.email}
+          placeholder="E-mail"
           required
           autoComplete="off"
+          className={state.message ? "error" : ""}
         />
         <label htmlFor="phone">Tlf. nr.</label>
         <input type="tel" id="phone" name="last-name" placeholder="Tlf. nr." />
@@ -103,13 +106,12 @@ export default function SignUp() {
           required
         /> */}
 
-        <div className="error-message">
+        {/*   <div className="error-message">
           <p>{errorMessage}</p>
-        </div>
+        </div> */}
 
-        <div className="btns">
-          <button>Opret profil</button>
-        </div>
+        <button type="submit">Opret bruger</button>
+        {state?.message && <p className="error-message">{state.message}</p>}
       </form>
     </section>
   );

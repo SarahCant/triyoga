@@ -1,13 +1,15 @@
 "use client";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+/* import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase-config";
+import { auth } from "../firebase-config"; */
+import { useActionState } from "react";
 
-export default function SignIn() {
-  const [errorMessage, setErrorMessage] = useState("");
+export default function SignInForm({ signInAction }) {
+  const [state, formAction] = useActionState(signInAction, {});
+  //const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSignIn(event) {
+  /* function handleSignIn(event) {
     event.preventDefault();
     const mail = event.target.mail.value;
     const password = event.target.password.value;
@@ -24,18 +26,18 @@ export default function SignIn() {
         code = code.replaceAll("auth/", "");
         setErrorMessage(code);
       });
-  }
+  } */
 
   return (
     <section id="sign-in">
       <h1>Log ind</h1>
-      <form id="sign-in-form" onSubmit={handleSignIn}>
-        <label htmlFor="mail">Mail</label>
+      <form id="sign-in-form" action={formAction}>
+        <label htmlFor="email">E-mail</label>
         <input
           type="email"
-          id="mail"
-          name="mail"
-          aria-label="mail"
+          id="email"
+          name="email"
+          defaultValue={state?.email}
           placeholder="Skriv din mail..."
           required
         />
@@ -44,18 +46,13 @@ export default function SignIn() {
         <input
           type="password"
           id="password"
-          aria-label="password"
           placeholder="Skriv din adgangskode..."
-          autoComplete="cuttent-password"
+          name="password"
         />
 
-        <div className="error-message">
-          <p>{errorMessage}</p>
-        </div>
+        <button type="submit">Log ind</button>
 
-        <div className="btns">
-          <button>Log ind</button>
-        </div>
+        {state?.message && <p className="error-message">{state.message}</p>}
       </form>
 
       {/* knap til opret bruger/tilbage knap */}

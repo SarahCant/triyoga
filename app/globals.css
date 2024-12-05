@@ -19,6 +19,7 @@ h1 {
   font-weight: 400;
   font-size: 2rem;
   text-align: center;
+  letter-spacing: 0.05em;
 }
 
 h2 {
@@ -35,7 +36,7 @@ p {
   font-optical-sizing: auto;
   font-weight: 300;
   font-size: 0.85rem;
-  line-height: 1.6rem;
+  line-height: 1.75rem;
 }
 
 :root {
@@ -54,4 +55,20 @@ body {
 main {
   margin: 6rem auto;
   width: 80%;
+}
+
+.btns {
+  background-color: var(--main);
+  color: var(--background);
+  border-radius: 20px;
+  padding: 0.5rem 1.25rem;
+  font-family: "Encode Sans Expanded", sans-serif;
+}
+
+.btns:hover {
+  background-color: #224021;
+}
+
+a {
+  font-family: "Encode Sans Expanded", sans-serif;
 }
