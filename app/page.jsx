@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
           className="w-full h-60 object-cover md:h-96"
         />
         <div className="flex flex-col items-center absolute top-20 left-0 right-0 text-[var(--background)]">
-          <h1 className="text-4xl md:pt-28 md:text-7xl">TriYoga</h1>
+          <h1 className="drop-shadow-md tracking-wider text-4xl md:pt-28 md:text-7xl">
+            TriYoga
+          </h1>
           <h3 className="italic pt-2 text-xl md:text-2xl">
             Yoga for krop og sjæl
           </h3>
@@ -28,7 +31,7 @@ export default function Home() {
                   alt="yogi"
                   className="z-10 absolute w-10"
                 />
-                <span className="bg-white block w-16 h-16 rounded-full absolute opacity-75"></span>
+                <span className="bg-[color:--background] block w-16 h-16 rounded-full absolute opacity-75"></span>
               </div>
               <p className="mt-6 text-center pt-2">yoga</p>
             </div>
@@ -41,7 +44,7 @@ export default function Home() {
                   alt="bølge"
                   className="z-10 absolute w-14"
                 />
-                <span className="bg-white block w-16 h-16 rounded-full absolute opacity-75"></span>
+                <span className="bg-[color:--background] block w-16 h-16 rounded-full absolute opacity-75"></span>
               </div>
               <p className="mt-6 text-center pt-2">åndedræt</p>
             </div>
@@ -54,7 +57,7 @@ export default function Home() {
                   alt="hånd"
                   className="z-10 absolute w-13 pl-0.5"
                 />
-                <span className="bg-white block w-16 h-16 rounded-full absolute opacity-75"></span>
+                <span className="bg-[color:--background] block w-16 h-16 rounded-full absolute opacity-75"></span>
               </div>
               <p className="mt-6 text-center pt-2">hånd mudras</p>
             </div>
@@ -112,12 +115,12 @@ export default function Home() {
         {/* Notice Board with upcomming events */}
         <section className="flex flex-col items-center text-center pb-20">
           <div className="w-4/5">
-            <h2 className="tracking-wider py-8">Opslagstavle</h2>
+            <h2 className="tracking-wider pt-12 pb-8">Opslagstavle</h2>
             <p className="leading-10 text-base md:text-left">
               Her finder du information om nuværende og kommende hold, workshops
               og tilmeldingsfrister:
             </p>
-            <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-5 border-solid border-2 border-[color:--main] active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] md:float-left">
+            <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-5 active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] md:float-left">
               Gå til booking
             </button>
           </div>
@@ -132,7 +135,7 @@ export default function Home() {
               alt=""
               className="px-5 absolute -top-6"
             />
-            <h2 className="tracking-wider py-8">Ugens stræk</h2>
+            <h2 className="tracking-wider pt-12 pb-8">Ugens stræk</h2>
             <div className="flex flex-col md:flex-row md:text-left md:pb-16">
               <div className="flex flex-col items-center pb-8">
                 <Image
@@ -153,7 +156,7 @@ export default function Home() {
                   rygspænding.
                 </p>
                 <p className="italic pb-8 text-xl leading-10 md:text-right">
-                  "Smile, breathe and go slowly."
+                  &quot; Smile, breathe and go slowly. &quot;
                   <br />- Thich Nhat Hanh
                 </p>
               </div>
@@ -172,15 +175,15 @@ export default function Home() {
             <form>
               <label htmlFor="email"></label>
               <div className="pt-8 md:flex md:items-center">
-                <div className="pr-3">
+                <div className="md:pr-3">
                   <input
                     type="email"
-                    placeholder="Indtast din e-mail"
+                    placeholder="   Indtast din e-mail"
                     className="rounded-3xl border-solid border-x border-y border-black h-8 w-72"
                   />
                 </div>
                 <div className="pt-5 md:pt-0">
-                  <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-8 border-solid border-2 border-[color:--main] active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] md:float-left">
+                  <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-8 active:bg-[#224021] md:hover:bg-[#224021] md:float-left">
                     Tilmeld
                   </button>
                 </div>
@@ -189,9 +192,47 @@ export default function Home() {
           </div>
         </section>
         {/* SoMe photos */}
-        <section className="flex justify-center text-center items-center">
+        <section className="flex justify-center text-center items-center pt-10">
           <div className="w-4/5 flex flex-col items-center pt-12">
             <h2>Følg med på Instagram</h2>
+            <div className="flex flex-col items-center md:flex-row md:justify-center md:gap-4">
+              <Link href="https://www.instagram.com/birgitte_eichild/">
+                <div>
+                  <Image
+                    src="/img/fp-ig-1.png"
+                    height={300}
+                    width={300}
+                    alt=""
+                    className="my-5 w-72 h-72 object-cover md:mx-5"
+                  />
+                </div>
+              </Link>
+              <Link href="https://www.instagram.com/birgitte_eichild/">
+                <div>
+                  <Image
+                    src="/img/fp-ig-2.png"
+                    height={300}
+                    width={300}
+                    alt=""
+                    className="hidden my-5 w-72 h-72 object-cover md:mx-5 md:flex"
+                  />
+                </div>
+              </Link>
+              <Link href="https://www.instagram.com/birgitte_eichild/">
+                <div>
+                  <Image
+                    src="/img/fp-ig-3.png"
+                    height={300}
+                    width={300}
+                    alt=""
+                    className="hidden my-5 w-72 h-72 object-cover md:mx-5 md:flex"
+                  />
+                </div>
+              </Link>
+            </div>
+            <Link href="https://www.instagram.com/birgitte_eichild/">
+              <h3>@birgitte_eichild</h3>
+            </Link>
           </div>
         </section>
       </main>
