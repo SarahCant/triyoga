@@ -222,6 +222,13 @@ export default function Calendar() {
           onClose={() => setSelectedClass(null)}
         />
       )}
+      {/* {selectedClass && modalType === "Book" && (
+        <redirect to confirm
+          selectedClass={selectedClass}
+          modalType={modalType}
+          onClose={() => setSelectedClass(null)}
+        />
+      )} */}
     </section>
   );
 }
