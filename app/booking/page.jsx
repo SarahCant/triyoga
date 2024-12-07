@@ -86,7 +86,6 @@ export default async function Booking() {
             </section>
           </div>
         </div>
-        <button className="btns">Læs</button>
       </main>
       {/* Calendar */}
       <h1 className="mt-8 mb-3">Kalender</h1>
