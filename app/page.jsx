@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import NoticeBoardGallery from "./components/NoticeBoardGallery";
 
 export default function Home() {
   return (
@@ -65,11 +66,15 @@ export default function Home() {
         </div>
       </section>
       <main className="max-w-4x1 mx-auto m-12 w-full">
-        <h2 className="text-center tracking-wider pb-8">
-          Velkommen til TriYoga Aarhus
-        </h2>
+        <div className="flex justify-center">
+          <div className="w-4/5">
+            <h2 className="text-center tracking-wider pt-3 pb-10 md:pt-5 md:pb-12">
+              Velkommen til TriYoga Aarhus
+            </h2>
+          </div>
+        </div>
         {/* About TriYoga and Vilhemlsborg */}
-        <section className="flex justify-center text-center items-center">
+        <section className="flex justify-center text-center items-center md:pb-10">
           <div className="w-4/5 flex flex-col items-center md:flex-row md:items-start">
             <div className="pb-8 md:w-full">
               <h2 className="font-thin">TriYoga</h2>
@@ -115,14 +120,23 @@ export default function Home() {
         {/* Notice Board with upcomming events */}
         <section className="flex flex-col items-center text-center pb-20">
           <div className="w-4/5">
-            <h2 className="tracking-wider pt-12 pb-8">Opslagstavle</h2>
-            <p className="leading-10 text-base md:text-left">
-              Her finder du information om nuværende og kommende hold, workshops
-              og tilmeldingsfrister:
-            </p>
-            <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-5 active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] md:float-left">
-              Gå til booking
-            </button>
+            <h2 className="tracking-wider pt-16 pb-8">Opslagstavle</h2>
+            <div className="md:relative">
+              <div className="flex flex-col w-full md:flex-row">
+                <p className="leading-10 text-base pb-5 md:text-left md:w-1/3">
+                  Her finder du information om nuværende og kommende hold,
+                  workshops og tilmeldingsfrister:
+                </p>
+                <div className="md:w-2/3 md:-mr-10">
+                  <NoticeBoardGallery />
+                </div>
+              </div>
+              <Link href="/booking">
+                <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-5 mt-10 active:bg-[#224021] active:border-[#224021] md:hover:bg-[#224021] md:hover:border-[#224021] md:float-left md:absolute md:top-[125px] md:left-0">
+                  Gå til booking
+                </button>
+              </Link>
+            </div>
           </div>
         </section>
         {/* Stretch of the week */}
@@ -135,8 +149,8 @@ export default function Home() {
               alt=""
               className="px-5 absolute -top-6"
             />
-            <h2 className="tracking-wider pt-12 pb-8">Ugens stræk</h2>
-            <div className="flex flex-col md:flex-row md:text-left md:pb-16">
+            <h2 className="tracking-wider pt-16 pb-8">Ugens stræk</h2>
+            <div className="flex flex-col md:flex-row md:text-left md:pb-10">
               <div className="flex flex-col items-center pb-8">
                 <Image
                   src="/img/fp-stretch.png"
@@ -165,7 +179,7 @@ export default function Home() {
         </section>
         {/* Newsletter */}
         <section className="flex justify-center text-center items-center">
-          <div className="w-4/5 flex flex-col items-center pt-4">
+          <div className="w-4/5 flex flex-col items-center pt-8">
             <h2 className="tracking-wider pt-8 pb-5">
               Tilmeld dig mit nyhedsbrev
             </h2>
