@@ -6,8 +6,8 @@ import Image from "next/image";
 const Calendar = () => {
   const [week, setWeek] = useState([]);
   const [currentWeek, setCurrentWeek] = useState(new Date());
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [modalType, setModalType] = useState(null);
+  const setSelectedClass = useState(null);
+  const setModalType = useState(null);
 
   const calculateWeekDates = (date) => {
     const monday = new Date(date);
