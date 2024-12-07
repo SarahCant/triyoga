@@ -1,13 +1,18 @@
 import Image from "next/image";
+// import { Suspense, lazy } from "react";
+//import LoadingCalendar from "../components/LoadingCalendar";
 import Calendar from "../components/Calendar";
+import ReadMorePopUp from "../components/ReadMorePopUp";
+
+// Lazy load the Calendar component
+//const Calendar = lazy(() => import("../components/Calendar"));
 
 export default async function Booking() {
   const response = await fetch(
     "https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams.json"
   ); // fetch data from Firebase
 
-  const dataObject = await response.json(); //convert response to JSON object
-  //console.log(dataObject);
+  const dataObject = await response.json(); // convert response to JSON object
 
   const teams = Object.keys(dataObject).map((key) => {
     return {
@@ -15,8 +20,6 @@ export default async function Booking() {
       ...dataObject[key],
     };
   });
-
-  //console.log(teams);
 
   return (
     <div>
@@ -90,6 +93,9 @@ export default async function Booking() {
       {/* Calendar */}
       <h1 className="mt-8 mb-3">Kalender</h1>
       <Calendar />
+      {/*  <Suspense fallback={<LoadingCalendar />}>
+        <Calendar />
+      </Suspense> */}
     </div>
   );
 }

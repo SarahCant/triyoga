@@ -38,16 +38,16 @@ export const fetchClassesForWeek = async (startDate, endDate) => {
     if (snapshot.exists()) {
       const data = snapshot.val();
       const currentWeekClasses = Object.values(data).filter((item) => {
-        // Convert to Date objects for comparison
+        //convert to date objects to compare with later
         const itemStartDate = new Date(item.startDate);
         const itemEndDate = new Date(item.endDate);
         const weekStartDate = new Date(startDate);
         const weekEndDate = new Date(endDate);
 
-        // Check if the class overlaps with the current week
+        //check if class overlaps with current week
         return (
-          itemEndDate >= weekStartDate && // The class ends after or during the start of the week
-          itemStartDate <= weekEndDate // The class starts before or during the end of the week
+          itemEndDate >= weekStartDate && // class ends after or during the start of the week
+          itemStartDate <= weekEndDate // class starts before or during the end of the week
         );
       });
 

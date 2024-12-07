@@ -2,20 +2,21 @@
 import { useEffect, useState } from "react";
 import { fetchClassesForWeek } from "../firebase-config";
 import Image from "next/image";
+import ReadMorePopUp from "./ReadMorePopUp";
 
-const Calendar = () => {
+export default function Calendar() {
   const [week, setWeek] = useState([]);
   const [currentWeek, setCurrentWeek] = useState(new Date());
-  const setSelectedClass = useState(null);
-  const setModalType = useState(null);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [modalType, setModalType] = useState(null);
 
   const calculateWeekDates = (date) => {
     const monday = new Date(date);
-    const day = monday.getDay() || 7; // Mon is 1, Sun is 7
+    const day = monday.getDay() || 7; //Mon is 1, Sun is 7
     if (day !== 1) monday.setDate(monday.getDate() - day + 1);
     const sunday = new Date(monday);
-    sunday.setDate(monday.getDate() + 6); // Sun = Mon + 6 --> Sun = 7th day
-    return { startOfWeek: monday, endOfWeek: sunday }; // Start of week = Mon, end of week = Sun
+    sunday.setDate(monday.getDate() + 6); //sun = Mon + 6 --> Sun = 7th day
+    return { startOfWeek: monday, endOfWeek: sunday }; //startOfWeek = Mon, endOfWeek = Sun
   };
 
   const fetchWeekClasses = async () => {
@@ -85,15 +86,22 @@ const Calendar = () => {
     return Math.ceil(((tempDate - yearStart) / 86400000 + 1) / 7);
   };
 
+  //find today to visualise it later
+  const isCurrentDay = (day) => {
+    const today = new Date().toISOString().split("T")[0];
+    return day === today;
+  };
+
   return (
-    <section className="w-10/12  mx-auto my-11">
+    <section className="w-10/12 mx-auto my-11">
+      {/* snap to today/current week */}
       <button
         onClick={() => setCurrentWeek(new Date())}
         className="text-lg underline text-[color:#814F26] font-bold"
       >
         I dag
       </button>
-      <div className="border-2 border-[color:#814F26] ">
+      <div className="border-2 border-[color:#814F26]">
         <div className="flex items-center text-xs md:text-base justify-between bg-[color:#F6B485] bg-opacity-60 p-4 border-b-2 border-[color:#814F26]">
           <button onClick={() => navigateWeek(-1)}>
             <Image
@@ -111,7 +119,6 @@ const Calendar = () => {
               month: "long",
               year: "numeric",
             })}
-            {/* "I dag" button */}
             <br />
           </h1>
           <button onClick={() => navigateWeek(1)}>
@@ -148,7 +155,15 @@ const Calendar = () => {
                 key={index}
                 className="p-4 flex flex-col items-center gap-4 md:px-0"
               >
-                <h3 className="font-semibold">{day}</h3> {/* class cards */}
+                <h3
+                  className={`font-semibold ${
+                    isCurrentDay(currentDay)
+                      ? "text-[color:--main] px-4 border-b-2 border-[color:--main]"
+                      : ""
+                  }`}
+                >
+                  {day}
+                </h3>
                 {week
                   .filter((c) => c.actualDate === currentDay)
                   .map((c, i) => (
@@ -171,13 +186,12 @@ const Calendar = () => {
                             Pladser: {c.maxParticipants - c.currentParticipants}
                           </p>
                         </div>
-                        {/* buttons */}
                         <div className="flex flex-col gap-3 items-center p-2 md:flex-row md:items-baseline md:px-0 md:w-auto md:gap-1">
                           <button
                             className="btns text-xs md:px-3"
                             onClick={() => {
                               setSelectedClass(c);
-                              setModalType("Læs mere");
+                              setModalType("Læs");
                             }}
                           >
                             Læs
@@ -200,9 +214,14 @@ const Calendar = () => {
             );
           })}
         </div>
-      </div>{" "}
+      </div>
+      {selectedClass && modalType === "Læs" && (
+        <ReadMorePopUp
+          selectedClass={selectedClass}
+          modalType={modalType}
+          onClose={() => setSelectedClass(null)}
+        />
+      )}
     </section>
   );
-};
-
-export default Calendar;
+}
