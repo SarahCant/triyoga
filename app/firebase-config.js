@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
@@ -32,25 +31,31 @@ export const auth = getAuth(app);
 const database = getDatabase(app);
 export const fetchClassesForWeek = async (startDate, endDate) => {
   const classesRef = ref(database, "teams");
-  const classesQuery = query(
-    classesRef,
-    orderByChild("startDate"),
-    startAt(startDate),
-    endAt(endDate)
-  );
+  const classesQuery = query(classesRef, orderByChild("startDate"));
 
   try {
     const snapshot = await get(classesQuery);
     if (snapshot.exists()) {
       const data = snapshot.val();
-      //convert object to array + filter for valid dates
-      return Object.values(data).filter(
-        (item) => item.startDate >= startDate && item.startDate <= endDate
-      );
+      const currentWeekClasses = Object.values(data).filter((item) => {
+        // Convert to Date objects for comparison
+        const itemStartDate = new Date(item.startDate);
+        const itemEndDate = new Date(item.endDate);
+        const weekStartDate = new Date(startDate);
+        const weekEndDate = new Date(endDate);
+
+        // Check if the class overlaps with the current week
+        return (
+          itemEndDate >= weekStartDate && // The class ends after or during the start of the week
+          itemStartDate <= weekEndDate // The class starts before or during the end of the week
+        );
+      });
+
+      return currentWeekClasses;
     }
-    return []; //return empty array if there's no data
+    return [];
   } catch (error) {
     console.error("Error fetching classes: ", error);
-    return []; //show errors in console
+    return [];
   }
 };
