@@ -42,10 +42,12 @@ export default async function ProfilePage() {
         <div className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975]">
           <p className="leading-7">
             <strong>Velkommen til {user.firstname}</strong>, <br />
-            "Min Profil" er ikke helt færdig endnu - men vi takker dig for din
-            interesse! Her vil du kunne danne dig et overblik over tilmeldte
-            hold, redigere i dine telmeldinger og opdatere dine
-            kontaktinformationer.
+            &quot;Min Profil&quot; er ikke helt færdig endnu - men vi takker dig
+            for din interesse! Her vil du kunne danne dig et overblik over
+            tilmeldte hold, redigere i dine telmeldinger og opdatere dine
+            kontaktinformationer. <br />
+            Indtil da kan du eventuelt navigere dig frem til en af de følgende
+            sider:
           </p>
         </div>
       </div>
