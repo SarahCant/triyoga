@@ -90,7 +90,7 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <nav
-          className={`bg-[color:--background] text-black  text-center transition-all duration-300 ease-out h-fit w-full md:w-auto md:flex md:justify-center md:items-center ${
+          className={`font-sans-[encode-sans-expanded] bg-[color:--background] text-black  text-center transition-all duration-300 ease-out h-fit w-full md:w-auto md:flex md:justify-center md:items-center ${
             isOpen ? "flex flex-col" : "hidden"
           }`}
         >
