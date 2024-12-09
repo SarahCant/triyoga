@@ -76,8 +76,10 @@ export default function Gallery() {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`top-0 left-0 w-full h-full transition-opacity duration-500 ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
+              className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+                index === currentSlide
+                  ? "opacity-100 visible"
+                  : "opacity-0 invisible"
               }`}
             >
               <Image
