@@ -472,7 +472,7 @@ export default async function YourBooking({ params }) {
         <strong>Pladser:</strong> {team.maxParticipants}
       </p>
       <p>
-        <strong>Ledige pladser:</strong>{" "}
+        <strong>Ledige pladser:</strong>
         {team.maxParticipants - team.currentParticipants}
       </p>
     </main>
