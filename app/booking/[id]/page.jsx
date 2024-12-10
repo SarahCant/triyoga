@@ -509,11 +509,20 @@ import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
 
 export default function YourBooking({ params }) {
   const { id } = params; // No need for `await` here in client components
   const [team, setTeam] = useState(null);
   const router = useRouter();
+
+  const session = auth();
+
+  // if the user is already signed in, redirect them to the profile page
+  if (session) {
+    redirect("/profile");
+  }
 
   // Fetch data on component mount
   useEffect(() => {
