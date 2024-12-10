@@ -2,7 +2,6 @@ import Image from "next/image";
 // import { Suspense, lazy } from "react";
 //import LoadingCalendar from "../components/LoadingCalendar";
 import Calendar from "../components/Calendar";
-import ReadMorePopUp from "../components/ReadMorePopUp";
 
 // Lazy load the Calendar component
 //const Calendar = lazy(() => import("../components/Calendar"));
@@ -93,9 +92,6 @@ export default async function Booking() {
       {/* Calendar */}
       <h1 className="mt-8 mb-3">Kalender</h1>
       <Calendar />
-      {/*  <Suspense fallback={<LoadingCalendar />}>
-        <Calendar />
-      </Suspense> */}
     </div>
   );
 }

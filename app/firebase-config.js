@@ -10,10 +10,6 @@ import {
   endAt,
 } from "firebase/database";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDYrVDfV2oI4nyh9eRWx_eaIPvgoeNpuag",
   authDomain: "triyoga-bbaf1.firebaseapp.com",
@@ -24,11 +20,11 @@ const firebaseConfig = {
   appId: "1:596940906434:web:d976596c8f763d1cfe005b",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const database = getDatabase(app);
+export { database };
 export const fetchClassesForWeek = async (startDate, endDate) => {
   const classesRef = ref(database, "teams");
   const classesQuery = query(classesRef, orderByChild("startDate"));

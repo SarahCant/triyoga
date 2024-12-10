@@ -3,12 +3,23 @@ import { useEffect, useState } from "react";
 import { fetchClassesForWeek } from "../firebase-config";
 import Image from "next/image";
 import ReadMorePopUp from "./ReadMorePopUp";
+//import { redirect, useRouter } from "next/navigation";
+import Link from "next/link";
+
+import YourBooking from "../booking/[id]/page";
 
 export default function Calendar() {
   const [week, setWeek] = useState([]);
   const [currentWeek, setCurrentWeek] = useState(new Date());
   const [selectedClass, setSelectedClass] = useState(null);
   const [modalType, setModalType] = useState(null);
+  //const router = useRouter();
+
+  /*   const handleBookClick = (classId) => {
+    router.push(`/booking/yourbooking?classId=${classId}`);
+  }; */
+
+  //for yourbooking
 
   const calculateWeekDates = (date) => {
     const monday = new Date(date);
@@ -197,7 +208,16 @@ export default function Calendar() {
                             Læs
                           </button>
 
-                          <button
+                          <button>
+                            <Link
+                              href={`/booking/${id}`}
+                              className="btns text-xs md:px-3"
+                            >
+                              Book
+                            </Link>
+                          </button>
+
+                          {/*    <button
                             className="btns text-xs md:px-3"
                             onClick={() => {
                               setSelectedClass(c);
@@ -205,7 +225,30 @@ export default function Calendar() {
                             }}
                           >
                             Book
-                          </button>
+                          </button> */}
+
+                          {/*  <button
+                            className="btns text-xs md:px-3"
+                            key={i}
+                            onClick={() => {
+                              router.push(
+                                `/booking/yourbooking?classId=${c.id}`
+                              );
+                            }}
+                          >
+                            Book
+                          </button> */}
+
+                          {/*   <button
+                            className="btns text-xs md:px-3"
+                            onClick={() => {
+                              router.push(
+                                `/booking/yourbooking?classId=${c.id}`
+                              );
+                            }}
+                          >
+                            Book
+                          </button> */}
                         </div>
                       </div>
                     </div>
@@ -222,12 +265,37 @@ export default function Calendar() {
           onClose={() => setSelectedClass(null)}
         />
       )}
-      {/* {selectedClass && modalType === "Book" && (
-        <redirect to confirm
+
+      {selectedClass && modalType === "Book" && (
+        <YourBooking
           selectedClass={selectedClass}
           modalType={modalType}
           onClose={() => setSelectedClass(null)}
         />
+      )}
+
+      {/* {selectedClass &&
+        modalType === "Book" &&
+        // Redirect to "/booking/yourbooking" with query parameters
+        router.push(
+          `/booking/yourbooking?selectedClass=${selectedClass}&modalType=${modalType}`
+        )} */}
+
+      {/* {selectedClass && modalType === "Book" && (
+        <div className="fixed bg-[color:--main] w-2/3 top-1/3">
+      
+          <h2>Gå til booking</h2>
+          <p>Du er ved at blive sendt videre til booking bekræftigelse.</p>
+          <button
+            onClick={() => {
+              router.push(`/booking/yourbooking?classId=${selectedClass.id}`);
+              setSelectedClass(null); // Clear the selected class after redirect
+            }}
+          >
+            Gå til bekræft
+          </button>
+          <button onClick={() => setSelectedClass(null)}>Luk</button>
+        </div>
       )} */}
     </section>
   );
