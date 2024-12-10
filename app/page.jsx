@@ -192,8 +192,8 @@ export default function Home() {
                 <div className="md:pr-3">
                   <input
                     type="email"
-                    placeholder="   Indtast din e-mail"
-                    className="rounded-3xl border-solid border-x border-y border-black h-8 w-72"
+                    placeholder="Indtast din e-mail"
+                    className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
                   />
                 </div>
                 <div className="pt-5 md:pt-0">
