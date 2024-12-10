@@ -43,6 +43,7 @@ export default async function SignIn() {
       lastname,
       email,
       password: hashedPassword, // save the hashed password
+      booked,
     });
 
     // redirect the user to the sign-in page

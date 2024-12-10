@@ -443,10 +443,12 @@ const YourBooking = ({ classId }) => {
 
 export default YourBooking;
  */
+/* import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
+import Link from "next/link";
+
 
 export default async function YourBooking({ params }) {
   const { id } = await params;
-  console.log(id);
 
   const response = await fetch(
     `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`
@@ -454,27 +456,160 @@ export default async function YourBooking({ params }) {
 
   const team = await response.json();
 
+  const startWeek = getWeekNumber(team.startDate);
+  const endWeek = getWeekNumber(team.endDate);
+
   return (
-    <main>
-      <p>
-        <strong>Beskrivelse:</strong> {team.description}
+    <main className="md:pt-12">
+      <h1>Din booking</h1>
+      <p className="pb-4 text-center">
+        Du er i gang med at tilmelde dig følgende hold
       </p>
-      <p>
-        <strong>Dag:</strong> {team.day}
+      <div className="border-x-8 border-[color:--main] md:mx-20">
+        <article className=" bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
+          <h3>Holdnavn: {team.name}</h3>
+          <p className="leading-5">
+            Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
+            {startWeek}-{endWeek} <br />
+            Niveau: {team.niveau} <br /> <br />
+            <strong className="">Pris: {team.price}</strong>
+          </p>
+          <p className="py-4 leading-7">
+            <strong>Betalingsinformation</strong> <br />
+            Vi tilbyder mulighed for betaling via <strong>
+              MobilePay
+            </strong>{" "}
+            eller <strong>kontant</strong> ved første undervisningsgang.
+            Betalingen skal være på plads inden for den første
+            undervisningstime, og vi opfordrer til, at du medbringer enten
+            kontanter eller har MobilePay klar til at gennemføre betalingen.
+            Hvis du har spørgsmål eller ønsker yderligere information om
+            betalingsmulighederne, er du altid velkommen til at kontakte os
+            enten på mobil eller på mail.
+          </p>
+
+          <div className="text-xs flex flex-col w-7/12 m-auto gap-6 pt-4 md:flex-row">
+            <Link href={"/booking"} className="btns">
+              Tilbage til kalender
+            </Link>
+            <button className="btns">Bekræft booking</button>
+          </div>
+        </article>
+      </div>
+    </main>
+  );
+}
+ */
+
+//--------------- WORKS BUT MISSING LOG UNDER USER IN FIREBASE --------
+
+"use client";
+
+import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+export default function YourBooking({ params }) {
+  const { id } = params; // No need for `await` here in client components
+  const [team, setTeam] = useState(null);
+  const router = useRouter();
+
+  // Fetch data on component mount
+  useEffect(() => {
+    async function fetchTeam() {
+      const response = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`
+      );
+      if (!response.ok) {
+        console.error("Failed to fetch team data.");
+        return;
+      }
+      const data = await response.json();
+      setTeam(data);
+    }
+    fetchTeam();
+  }, [id]);
+
+  if (!team) {
+    return <p>Loading...</p>;
+  }
+
+  const startWeek = getWeekNumber(team.startDate);
+  const endWeek = getWeekNumber(team.endDate);
+
+  const handleBookingConfirmation = async () => {
+    try {
+      //pdate Firebase
+      const updateResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currentParticipants: (team.currentParticipants || 0) + 1,
+          }),
+        }
+      );
+
+      if (!updateResponse.ok) {
+        throw new Error("Failed to update booking.");
+      }
+
+      // Redirect to confirm page
+      router.push(`/confirm/${id}`);
+    } catch (error) {
+      console.error("Error during booking confirmation:", error);
+    }
+  };
+
+  return (
+    <main className="md:pt-12">
+      <h1>Din booking</h1>
+      <p className="pb-4 text-center">
+        Du er i gang med at tilmelde dig følgende hold
       </p>
-      <p>
-        <strong>Starttid:</strong> {team.startTime}
-      </p>
-      <p>
-        <strong>Sluttid:</strong> {team.endTime}
-      </p>
-      <p>
-        <strong>Pladser:</strong> {team.maxParticipants}
-      </p>
-      <p>
-        <strong>Ledige pladser:</strong>
-        {team.maxParticipants - team.currentParticipants}
-      </p>
+      <div className="border-x-8 border-[color:--main] md:mx-20">
+        <article className=" bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
+          <h3>Holdnavn: {team.name}</h3>
+          <p className="leading-5">
+            Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
+            {startWeek}-{endWeek} <br />
+            Niveau: {team.niveau} <br /> <br />
+            <strong className="">Pris: {team.price}</strong>
+          </p>
+          <p className="py-4 leading-7">
+            <strong>Betalingsinformation</strong> <br />
+            Vi tilbyder mulighed for betaling via <strong>
+              MobilePay
+            </strong>{" "}
+            eller <strong>kontant</strong> ved første undervisningsgang.
+            Betalingen skal være på plads inden for den første
+            undervisningstime, og vi opfordrer til, at du medbringer enten
+            kontanter eller har MobilePay klar til at gennemføre betalingen.
+            Hvis du har spørgsmål eller ønsker yderligere information om
+            betalingsmulighederne, er du altid velkommen til at kontakte os
+            enten på mobil eller på mail.
+          </p>
+
+          <div className="text-xs flex flex-col w-7/12 m-auto gap-6 pt-4 md:flex-row">
+            <Link href={"/booking"} className="btns text-center">
+              Tilbage til kalender
+            </Link>
+            <button
+              className="btns"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default button behavior
+                handleBookingConfirmation();
+              }}
+            >
+              Bekræft booking
+            </button>
+          </div>
+        </article>
+      </div>
     </main>
   );
 }

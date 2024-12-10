@@ -243,7 +243,7 @@ export default function Calendar() {
 
 //---------------- RIGHT LOOK + MAPPING BUT BOOK BTNS DON'T WORK -------------
 
-"use client";
+/* "use client";
 import { useEffect, useState } from "react";
 import { fetchClassesForWeek } from "../firebase-config";
 import Image from "next/image";
@@ -495,11 +495,11 @@ export default function Calendar() {
       )}
     </section>
   );
-}
+} */
 
 // --------------------- BOOK BTNS WORK BUT CLASSES SHOWN REGARDLESS OF START/END DATES
 
-/* "use client";
+"use client";
 import { useEffect, useState } from "react";
 import { fetchClassesForWeek } from "../firebase-config";
 import Image from "next/image";
@@ -717,4 +717,3 @@ export default function Calendar() {
     </section>
   );
 }
- */
