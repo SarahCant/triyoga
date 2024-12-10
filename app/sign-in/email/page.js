@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth, signIn } from "../../auth";
 import Link from "next/link";
 import SignInForm from "@/app/components/SignInForm";
+import Image from "next/image";
 
 export default async function SignIn() {
   const session = await auth();
@@ -31,13 +32,27 @@ export default async function SignIn() {
 
   return (
     <main id="sign-in-page" className="page">
-      <section className="container">
+      <Link href="/sign-in">
+        <div className="flex mt-36">
+          <Image
+            src="/img/icons/arrow-green.png"
+            height={30}
+            width={30}
+            alt="Pil tilbage"
+            className="mr-2"
+          />
+          <p className="text-[color:--main] text-base">Tilbage</p>
+        </div>
+      </Link>
+      <section className="my-8">
         <h1>Log ind</h1>
         <SignInForm signInAction={handleSignInWithEmailAndPassword} />
-        <p className="text-center">
-          Har du ikke en profil?
-          <Link href="/sign-up">Opret dig her.</Link>
-        </p>
+        <div className="text-center underline">
+          <p className="pb-3">Glemt adgangskode</p>
+          <p>
+            <Link href="/sign-up">Opret profil</Link>
+          </p>
+        </div>
       </section>
     </main>
   );

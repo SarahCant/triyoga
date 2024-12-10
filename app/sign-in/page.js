@@ -11,42 +11,20 @@ export default async function SignIn() {
     redirect("/profile");
   }
 
-  async function handleSignInWithGitHub() {
-    "use server";
-
-    await signIn("github", {
-      redirectTo: "/posts",
-    });
-  }
-  async function handleSignInWithGoogle() {
-    "use server";
-
-    await signIn("google", {
-      redirectTo: "/posts",
-    });
-  }
-
   return (
     <main id="sign-in-page" className="page">
-      <section className="container">
-        <h1>Log ind</h1>
-        <form className="form-providers">
-          <button
-            type="button"
-            className="btn-github"
-            onClick={handleSignInWithGitHub}
-          >
-            Log ind med GitHub
-          </button>
-          <button
-            type="button"
-            className="btn-google"
-            onClick={handleSignInWithGoogle}
-          >
-            Log ind med Google
-          </button>
-          <Link href="/sign-in/email" className="btn-email">
-            <button type="button">Log ind med e-mail</button>
+      <section className="flex flex-col items-center my-44">
+        <h1>Log ind / Opret profil</h1>
+        <p className="text-base mt-5 mb-14 text-center">
+          For at booke dig på et hold skal du enten logge ind eller oprette en
+          profil:
+        </p>
+        <form>
+          <Link href="/sign-in/email" className="btns m-2 md:m-5">
+            <button type="button">Log ind</button>
+          </Link>
+          <Link href="/sign-up" className="btns m-2 md:m-5">
+            <button type="button">Opret profil</button>
           </Link>
         </form>
       </section>

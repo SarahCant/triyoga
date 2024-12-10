@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import { createUser, getUserByMail } from "../auth/helpers";
 import SignUp from "../components/SignUp";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function SignIn() {
   const session = await auth();
@@ -49,8 +51,20 @@ export default async function SignIn() {
 
   return (
     <main id="sign-in-page" className="page">
-      <section className="container">
-        <h1>Opret bruger</h1>
+      <Link href="/sign-in">
+        <div className="flex mt-36">
+          <Image
+            src="/img/icons/arrow-green.png"
+            height={30}
+            width={30}
+            alt="Pil tilbage"
+            className="mr-2"
+          />
+          <p className="text-[color:--main] text-base">Tilbage</p>
+        </div>
+      </Link>
+      <section className="my-8">
+        <h1>Opret profil</h1>
         <SignUp signUpAction={handleSignUpWithEmailAndPassword} />
       </section>
     </main>
