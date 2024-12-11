@@ -507,22 +507,17 @@ export default async function YourBooking({ params }) {
 
 import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/auth";
 
 export default function YourBooking({ params }) {
-  const { id } = params; // No need for `await` here in client components
+  const { id } = params;
   const [team, setTeam] = useState(null);
   const router = useRouter();
 
-  const session = auth();
-
-  // if the user is already signed in, redirect them to the profile page
-  if (session) {
-    redirect("/profile");
-  }
+  // if the user isn't signed in redirect to sign-in
 
   // Fetch data on component mount
   useEffect(() => {
@@ -567,8 +562,8 @@ export default function YourBooking({ params }) {
         throw new Error("Failed to update booking.");
       }
 
-      // Redirect to confirm page
-      router.push(`/confirm/${id}`);
+      // Redirect to confirmation page
+      router.push(`/confirmation/${id}`);
     } catch (error) {
       console.error("Error during booking confirmation:", error);
     }
