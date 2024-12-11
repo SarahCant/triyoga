@@ -503,7 +503,7 @@ export default async function YourBooking({ params }) {
 
 //--------------- WORKS BUT MISSING LOG UNDER USER IN FIREBASE --------
 
-"use client";
+/* "use client";
 
 import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
 import Link from "next/link";
@@ -577,6 +577,330 @@ export default function YourBooking({ params }) {
       </p>
       <div className="border-x-8 border-[color:--main] md:mx-20">
         <article className=" bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
+          <h3>Holdnavn: {team.name}</h3>
+          <p className="leading-5">
+            Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
+            {startWeek}-{endWeek} <br />
+            Niveau: {team.niveau} <br /> <br />
+            <strong className="">Pris: {team.price}</strong>
+          </p>
+          <p className="py-4 leading-7">
+            <strong>Betalingsinformation</strong> <br />
+            Vi tilbyder mulighed for betaling via <strong>
+              MobilePay
+            </strong>{" "}
+            eller <strong>kontant</strong> ved første undervisningsgang.
+            Betalingen skal være på plads inden for den første
+            undervisningstime, og vi opfordrer til, at du medbringer enten
+            kontanter eller har MobilePay klar til at gennemføre betalingen.
+            Hvis du har spørgsmål eller ønsker yderligere information om
+            betalingsmulighederne, er du altid velkommen til at kontakte os
+            enten på mobil eller på mail.
+          </p>
+
+          <div className="text-xs flex flex-col w-7/12 m-auto gap-6 pt-4 md:flex-row">
+            <Link href={"/booking"} className="btns text-center">
+              Tilbage til kalender
+            </Link>
+            <button
+              className="btns"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default button behavior
+                handleBookingConfirmation();
+              }}
+            >
+              Bekræft booking
+            </button>
+          </div>
+        </article>
+      </div>
+    </main>
+  );
+}
+ */
+
+//------------- WORKS WITH LISTEN TO SESSION + REDIRECT TO SIGN-IN IF !SESSION  BUT WITHOUT CORRECT USER LOG TO FIREBASE ----
+/* "use client";
+
+import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { getSession } from "next-auth/react"; // Import getSession for checking the session
+
+export default function YourBooking({ params }) {
+  const { id } = params;
+  const [team, setTeam] = useState(null);
+  const [user, setUser] = useState(null); // To store user data
+  const router = useRouter();
+
+  // Check if the user is logged in before rendering the component
+  useEffect(() => {
+    async function checkSession() {
+      const session = await getSession();
+      if (!session) {
+        // Redirect to sign-in page if not authenticated
+        router.push("/sign-in");
+      } else {
+        setUser(session.user); // Store the logged-in user
+      }
+    }
+
+    checkSession();
+  }, [router]);
+
+  // Fetch team data once the component is mounted
+  useEffect(() => {
+    async function fetchTeam() {
+      const response = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`
+      );
+      if (!response.ok) {
+        console.error("Failed to fetch team data.");
+        return;
+      }
+      const data = await response.json();
+      setTeam(data);
+    }
+    fetchTeam();
+  }, [id]);
+
+  // If team data is not available, show loading state
+  if (!team) {
+    return <p>Loading...</p>;
+  }
+
+  const startWeek = getWeekNumber(team.startDate);
+  const endWeek = getWeekNumber(team.endDate);
+
+  const handleBookingConfirmation = async () => {
+    if (!user) {
+      console.error("User not authenticated.");
+      return;
+    }
+
+    try {
+      // Update Firebase with the new number of participants in the team
+      const updateResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currentParticipants: (team.currentParticipants || 0) + 1,
+          }),
+        }
+      );
+
+      if (!updateResponse.ok) {
+        throw new Error("Failed to update booking.");
+      }
+
+      // Add the team name to the user's 'booked' field in Firebase
+      const userResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users/${user.id}.json`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            booked: user.booked ? `${user.booked}, ${team.name}` : team.name,
+          }),
+        }
+      );
+
+      if (!userResponse.ok) {
+        throw new Error("Failed to update user's booking.");
+      }
+
+      // Redirect to confirmation page
+      router.push(`/confirmation/${id}`);
+    } catch (error) {
+      console.error("Error during booking confirmation:", error);
+    }
+  };
+
+  return (
+    <main className="md:pt-12">
+      <h1>Din booking</h1>
+      <p className="pb-4 text-center">
+        Du er i gang med at tilmelde dig følgende hold
+      </p>
+      <div className="border-x-8 border-[color:--main] md:mx-20">
+        <article className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
+          <h3>Holdnavn: {team.name}</h3>
+          <p className="leading-5">
+            Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
+            {startWeek}-{endWeek} <br />
+            Niveau: {team.niveau} <br /> <br />
+            <strong className="">Pris: {team.price}</strong>
+          </p>
+          <p className="py-4 leading-7">
+            <strong>Betalingsinformation</strong> <br />
+            Vi tilbyder mulighed for betaling via <strong>
+              MobilePay
+            </strong>{" "}
+            eller <strong>kontant</strong> ved første undervisningsgang.
+            Betalingen skal være på plads inden for den første
+            undervisningstime, og vi opfordrer til, at du medbringer enten
+            kontanter eller har MobilePay klar til at gennemføre betalingen.
+            Hvis du har spørgsmål eller ønsker yderligere information om
+            betalingsmulighederne, er du altid velkommen til at kontakte os
+            enten på mobil eller på mail.
+          </p>
+
+          <div className="text-xs flex flex-col w-7/12 m-auto gap-6 pt-4 md:flex-row">
+            <Link href={"/booking"} className="btns text-center">
+              Tilbage til kalender
+            </Link>
+            <button
+              className="btns"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default button behavior
+                handleBookingConfirmation();
+              }}
+            >
+              Bekræft booking
+            </button>
+          </div>
+        </article>
+      </div>
+    </main>
+  );
+}
+ */
+
+//-------- TRYING TO ADD CORRECT USER LOG TO FIREBASE
+"use client";
+import { getSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
+import { useRouter } from "next/navigation";
+
+export default function YourBooking({ params }) {
+  const { id } = params;
+  const [team, setTeam] = useState(null);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function checkSession() {
+      const session = await getSession();
+      if (!session) {
+        router.push("/sign-in");
+      } else {
+        setUser(session.user);
+      }
+    }
+
+    checkSession();
+  }, [router]);
+
+  useEffect(() => {
+    async function fetchTeam() {
+      try {
+        const response = await fetch(
+          `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch team data.");
+        }
+        const data = await response.json();
+        setTeam(data);
+      } catch (error) {
+        setError("Failed to load team data. Please try again.");
+      }
+    }
+    fetchTeam();
+  }, [id]);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!team) {
+    return <p>Loading...</p>;
+  }
+
+  const startWeek = getWeekNumber(team.startDate);
+  const endWeek = getWeekNumber(team.endDate);
+
+  const handleBookingConfirmation = async () => {
+    if (!user || !user.email) {
+      setError("User not authenticated. Please sign in.");
+      return;
+    }
+
+    try {
+      // Update team's currentParticipants
+      const updateResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            currentParticipants: (team.currentParticipants || 0) + 1,
+          }),
+        }
+      );
+
+      if (!updateResponse.ok) {
+        throw new Error("Failed to update booking.");
+      }
+
+      // Fetch user data to get the unique ID
+      const userFetchResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users.json?orderBy="email"&equalTo="${user.email}"`
+      );
+
+      if (!userFetchResponse.ok) {
+        throw new Error("Failed to fetch user data.");
+      }
+
+      const userData = await userFetchResponse.json();
+      const userId = Object.keys(userData)[0];
+
+      if (!userId) {
+        throw new Error("User not found in database.");
+      }
+
+      // Update user's booked field with team ID
+      const userUpdateResponse = await fetch(
+        `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users/${userId}.json`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            booked: userData[userId].booked
+              ? `${userData[userId].booked}, ${id}` // Store the team ID instead of name
+              : id,
+          }),
+        }
+      );
+
+      if (!userUpdateResponse.ok) {
+        throw new Error("Failed to update user's booking.");
+      }
+
+      router.push(`/confirmation/${id}`);
+    } catch (error) {
+      setError(`Error during booking confirmation: ${error.message}`);
+    }
+  };
+
+  return (
+    <main className="md:pt-12">
+      <h1>Din booking</h1>
+      <p className="pb-4 text-center">
+        Du er i gang med at tilmelde dig følgende hold
+      </p>
+      <div className="border-x-8 border-[color:--main] md:mx-20">
+        <article className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
           <h3>Holdnavn: {team.name}</h3>
           <p className="leading-5">
             Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
