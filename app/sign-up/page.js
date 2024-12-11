@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { auth } from "../auth";
+import { auth, signIn } from "../auth";
 import { createUser, getUserByMail } from "../auth/helpers";
 import SignUp from "../components/SignUp";
 import Image from "next/image";
@@ -37,16 +37,30 @@ export default async function SignIn() {
     const salt = await bcrypt.genSalt(10); // generate a salt
     const hashedPassword = await bcrypt.hash(password, salt); // hash the password
 
-    // create the user
-    await createUser({
+    // Create user
+    const newUser = await createUser({
       firstname,
       lastname,
       email,
-      password: hashedPassword, // save the hashed password
+      password: hashedPassword,
     });
 
-    // redirect the user to the sign-in page
-    redirect("/sign-in");
+    if (newUser) {
+      // Authenticate the user
+      await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+
+      // Check if authentication was successful
+      const session = await auth();
+      if (session) {
+        redirect("/profile");
+      }
+    }
+
+    redirect("/profile");
   }
 
   return (

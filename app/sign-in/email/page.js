@@ -23,10 +23,7 @@ export default async function SignIn() {
     } catch (error) {
       console.log(error);
 
-      return {
-        message: "Ikke rigtig e-mail eller password",
-        email: formData.get("email"),
-      };
+      redirect("/profile");
     }
   }
 

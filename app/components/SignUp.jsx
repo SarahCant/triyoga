@@ -64,6 +64,7 @@ export default function SignUp({ signUpAction }) {
                 name="firstname"
                 placeholder="Fornavn"
                 required
+                pattern="[a-zA-ZæøåÆØÅ]+"
                 className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
               />
             </div>
@@ -77,6 +78,7 @@ export default function SignUp({ signUpAction }) {
                 name="lastname"
                 placeholder="Efternavn"
                 required
+                pattern="[a-zA-ZæøåÆØÅ]+"
                 className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
               />
             </div>
@@ -93,7 +95,9 @@ export default function SignUp({ signUpAction }) {
                 required
                 autoComplete="off"
                 className={`pl-3 rounded-3xl border border-black h-8 w-72 ${
-                  state.message ? "error" : ""
+                  {
+                    /*state.message ? "error" : "" */
+                  }
                 }`}
               />
             </div>
@@ -108,6 +112,7 @@ export default function SignUp({ signUpAction }) {
                 id="phone"
                 name="last-name"
                 placeholder="Telefonnummer"
+                pattern="[0-9]+"
                 className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
               />
             </div>
@@ -141,11 +146,12 @@ export default function SignUp({ signUpAction }) {
               <div className="py-1">
                 <input
                   type="checkbox"
-                  id="newsletter"
-                  name="newsletter"
-                  value="Nyhedsbrev"
+                  id="conditions"
+                  name="conditions"
+                  value="Betingelser"
+                  required
                 ></input>
-                <label htmlFor="newsletter" className="pl-2">
+                <label htmlFor="conditions" className="pl-2">
                   Acceptér <span className="underline">betingelser</span>*
                 </label>
               </div>

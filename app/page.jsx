@@ -9,7 +9,7 @@ export default function Home() {
       <section className="hero justify-center sm:flex-row items-center mt-12 md:mt-24">
         {/* indsæt hero img med Image */}
         <Image
-          src="/img/hero.png"
+          src="/img/fp-hero.png"
           height={4000}
           width={3000}
           alt="yogastudie"
