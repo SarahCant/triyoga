@@ -1,8 +1,21 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import NoticeBoardGallery from "./components/NoticeBoardGallery";
+import PopUp from "./components/PopUp";
+import { useState } from "react";
 
 export default function Home() {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+  };
+
   return (
     <>
       {/* Hero section */}
@@ -186,23 +199,43 @@ export default function Home() {
             <p className="text-base">
               Her sender jeg nyt ud om mine hold og workshops.
             </p>
-            <form>
-              <label htmlFor="email"></label>
-              <div className="pt-8 md:flex md:items-center">
-                <div className="md:pr-3">
-                  <input
-                    type="email"
-                    placeholder="Indtast din e-mail"
-                    className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
-                  />
-                </div>
-                <div className="pt-5 md:pt-0">
-                  <button className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-8 active:bg-[#224021] md:hover:bg-[#224021] md:float-left">
-                    Tilmeld
-                  </button>
-                </div>
+            <label htmlFor="email"></label>
+            <div className="pt-8 md:flex md:items-center">
+              <div className="md:pr-3">
+                <input
+                  type="email"
+                  placeholder="Indtast din e-mail"
+                  className="pl-3 rounded-3xl border-solid border-x border-y border-black h-8 w-72"
+                />
               </div>
-            </form>
+              <div className="pt-5 md:pt-0">
+                <button
+                  onClick={handleOpenPopup}
+                  className="bg-[color:--main] text-[color:--background] rounded-3xl py-2 px-8 active:bg-[#224021] md:hover:bg-[#224021] md:float-left"
+                >
+                  Tilmeld
+                </button>
+              </div>
+            </div>
+            <PopUp
+              popUpContent={
+                <>
+                  <div className="flex flex-col items-center my-16">
+                    <div className="w-4/5">
+                      <p className="text-base leading-7">
+                        Tak for interessen - nyhedsbrevet er dog ikke oppe at
+                        køre endnu. <br /> Hav en god dag!
+                      </p>
+                      <button onClick={handleClosePopup} className="btns mt-10">
+                        Luk
+                      </button>
+                    </div>
+                  </div>
+                </>
+              }
+              isVisible={isPopupVisible}
+              onClose={handleClosePopup}
+            />
           </div>
         </section>
         {/* SoMe photos */}

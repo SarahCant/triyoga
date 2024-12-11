@@ -16,10 +16,12 @@ export default function PopUp({ popUpContent, onClose }) {
   );
 }
  */
-
+"use client";
 import Image from "next/image";
 
-export default function PopUp({ popUpContent, onClose }) {
+export default function PopUp({ popUpContent, isVisible, onClose }) {
+  if (!isVisible) return null; // Don't render if not visible
+
   const handleBackdropClick = (e) => {
     if (e.target.id === "backdrop") {
       onClose();
@@ -41,7 +43,7 @@ export default function PopUp({ popUpContent, onClose }) {
           alt="Close PopUp"
           onClick={onClose}
         />
-        <div className="content">{popUpContent}</div>
+        <div>{popUpContent}</div>
       </section>
     </div>
   );
