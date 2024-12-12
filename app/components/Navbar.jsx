@@ -125,7 +125,7 @@ export default function Navbar() {
                 : ""
             }`}
           >
-            Tilbud
+            Hold
           </Link>
           <Link
             href="/booking"

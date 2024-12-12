@@ -32,21 +32,6 @@ export default async function ProfilePage() {
     bookedTeams = await Promise.all(teamFetchPromises);
   }
 
-  async function handleSaveUser(formData) {
-    "use server";
-    const firstname = formData.get("firstname");
-    const title = formData.get("title");
-
-    const saveResponse = await fetch(url, {
-      method: "PATCH",
-      body: JSON.stringify({ firstname, title }),
-    });
-
-    if (saveResponse.ok) {
-      redirect("/profile");
-    }
-  }
-
   //handle sign out
   async function handleSignOut() {
     "use server";
@@ -103,6 +88,9 @@ export default async function ProfilePage() {
         </button>
         <Link href="/">
           <button className="btns">Forside</button>
+        </Link>
+        <Link href="/booking">
+          <button className="btns">Booking</button>
         </Link>
       </div>
     </main>
