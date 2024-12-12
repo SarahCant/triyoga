@@ -39,23 +39,6 @@ export default async function Booking() {
             </p>
             {/* icon section */}
             <section className="flex justify-evenly pt-6 pb-2 -ml-3 -mr-2.5 items-center">
-              <div className="flex flex-col justify-center items-center ">
-                <Image
-                  src="/img/icons/calendar.png"
-                  width={20}
-                  height={20}
-                  alt="Kalender"
-                />
-                <p className="leading-5 text-xs">Vælg hold</p>
-              </div>
-
-              <Image
-                src="/img/icons/arrow-black.png"
-                width={32}
-                height={10}
-                alt="Pil til højre"
-              />
-
               <div className="flex flex-col justify-center items-center text-center">
                 <Image
                   src="/img/icons/profile.png"
@@ -68,6 +51,22 @@ export default async function Booking() {
                   <br />
                   Opret bruger
                 </p>
+              </div>
+
+              <Image
+                src="/img/icons/arrow-black.png"
+                width={32}
+                height={10}
+                alt="Pil til højre"
+              />
+              <div className="flex flex-col justify-center items-center ">
+                <Image
+                  src="/img/icons/calendar.png"
+                  width={20}
+                  height={20}
+                  alt="Kalender"
+                />
+                <p className="leading-5 text-xs">Vælg hold</p>
               </div>
 
               <Image

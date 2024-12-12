@@ -894,7 +894,7 @@ export default function YourBooking({ params }) {
   };
 
   return (
-    <main className="md:pt-12">
+    <main className="md:pt-12 min-h-screen">
       <h1>Din booking</h1>
       <p className="pb-4 text-center">
         Du er i gang med at tilmelde dig følgende hold
