@@ -1,14 +1,11 @@
+//SARAH + SOFIE
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
 import { createUser, getUserByMail } from "./helpers";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    GitHub,
-    Google,
     Credentials({
       credentials: {
         email: {},
@@ -36,14 +33,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return {
           name: dbUser.name,
           email: dbUser.email,
-          image: dbUser.image,
         };
       },
     }),
   ],
   callbacks: {
     async session({ session }) {
-      // Add additional properties to the session
       if (!session.fbUid) {
         // Get the user from the database
         let fbUser = await getUserByMail(session.user.email);
@@ -52,7 +47,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           fbUser = await createUser({
             email: session.user.email,
             name: session.user.name,
-            image: session.user.image,
           });
         }
         // Add the Firebase UID to the session

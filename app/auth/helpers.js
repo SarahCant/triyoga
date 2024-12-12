@@ -1,3 +1,6 @@
+//SOFIE + SARAH
+//SARAH: MINOR CHANGES + MADE SURE BOOKED WAS ADDED TO FIREBASE
+
 export async function getUserByMail(mail) {
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users.json?orderBy="email"&equalTo="${mail}"`;
   const response = await fetch(url);

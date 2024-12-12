@@ -1,3 +1,5 @@
+//FUNCTIONALITY: SARAH + SOFIE
+//STYLING: SOFIE
 import { redirect } from "next/navigation";
 import { auth, signIn } from "../../auth";
 import Link from "next/link";

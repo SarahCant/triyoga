@@ -1,54 +1,11 @@
+//FUNCTIONALITY: SARAH + SOFIE
+//STYLING: SOFIE
 "use client";
 
-//import { useState } from "react";
-//import { createUserWithEmailAndPassword } from "firebase/auth";
-//import { auth } from "../firebase-config";
 import { useActionState, signUpAction } from "react";
 
 export default function SignUp({ signUpAction }) {
-  //const [errorMessage, setErrorMessage] = useState("");
   const [state, formAction] = useActionState(signUpAction, {});
-
-  /* function handleSignUp(event) {
-    event.preventDefault();
-    const form = event.target;
-
-    const firstname = form.firstname.value;
-    const lastname = form.lastname.value;
-    const mail = form.mail.value;
-    const phone = form.phone.value;
-    const password = form.password.value;
-
-    createUserWithEmailAndPassword(auth, mail, password)
-      .then((userCredential) => {
-        //create user and sign in
-        const user = userCredential.user;
-        console.log(user);
-        createUser(user.uid, firstname, lastname, mail, phone, password);
-      })
-      .catch((error) => {
-        let code = error.code;
-        console.log(code);
-        code = code.replaceAll("-", " ");
-        code = code.replaceAll("auth/", "");
-        setErrorMessage(code);
-      });
-  }
-
-  async function createUser(uid, firstname, lastname, mail, phone, password) {
-    const url = `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users/${uid}.json`;
-    const response = await fetch(url, {
-      method: "PUT",
-      body: JSON.stringify({ firstname, lastname, mail, phone, password }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log("New user created: ", data);
-    } else {
-      setErrorMessage("Undskyld, noget gik galt");
-    }
-  } */
-
   return (
     <section id="sign-up" className="page">
       <form id="sign-up-form" action={formAction}>
@@ -94,11 +51,7 @@ export default function SignUp({ signUpAction }) {
                 placeholder="E-mail"
                 required
                 autoComplete="off"
-                className={`pl-3 rounded-3xl border border-black h-8 w-72 ${
-                  {
-                    /*state.message ? "error" : "" */
-                  }
-                }`}
+                className="pl-3 rounded-3xl border border-black h-8 w-72"
               />
             </div>
           </div>
@@ -163,21 +116,6 @@ export default function SignUp({ signUpAction }) {
             </div>
           </div>
         </div>
-
-        {/*       <label htmlFor="password">Gentag adgangskode</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          aria-label="password"
-          placeholder="Gentag adgangskode"
-          autoComplete="current-password"
-          required
-        /> */}
-
-        {/*   <div className="error-message">
-          <p>{errorMessage}</p>
-        </div> */}
 
         {state?.message && <p className="error-message">{state.message}</p>}
       </form>

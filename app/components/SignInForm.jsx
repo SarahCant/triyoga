@@ -1,32 +1,11 @@
+//FUNCTIONALITY: SARAH + SOFIE
+//STYLING: SOFIE
 "use client";
 
-/* import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
-import { auth } from "../firebase-config"; */
 import { useActionState } from "react";
 
 export default function SignInForm({ signInAction }) {
   const [state, formAction] = useActionState(signInAction, {});
-  //const [errorMessage, setErrorMessage] = useState("");
-
-  /* function handleSignIn(event) {
-    event.preventDefault();
-    const mail = event.target.mail.value;
-    const password = event.target.password.value;
-
-    signInWithEmailAndPassword(auth, mail, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        let code = error.code;
-        console.log(code);
-        code = code.replaceAll("-", " ");
-        code = code.replaceAll("auth/", "");
-        setErrorMessage(code);
-      });
-  } */
 
   return (
     <section id="sign-in">

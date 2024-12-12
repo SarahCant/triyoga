@@ -1,3 +1,5 @@
+//FUNCTIONALITY: SARAH + SOFIE
+//STYLING: SOFIE
 "use client";
 
 import Link from "next/link";

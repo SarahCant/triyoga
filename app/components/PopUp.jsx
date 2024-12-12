@@ -1,21 +1,4 @@
-/* import Image from "next/image";
-
-export default function PopUp({ popUpContent, onClose }) {
-  return (
-    <section className="bg-[color:#fff8e5] border-2 border-[color:--main] w-4/5 fixed top-40">
-      <Image
-        src="/img/icons/x.png"
-        width={30}
-        height={30}
-        className="absolute top-2 right-2 cursor-pointer"
-        alt="Close PopUp"
-        onClick={onClose}
-      />
-      <div className="content">{popUpContent}</div>
-    </section>
-  );
-}
- */
+//SARAH + SOFIE
 "use client";
 import Image from "next/image";
 

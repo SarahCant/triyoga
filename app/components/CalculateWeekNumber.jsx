@@ -1,4 +1,4 @@
-// utils/weekUtils.js
+//SARAH
 export function getWeekNumber(date) {
   const currentDate = new Date(date);
   const startOfYear = new Date(currentDate.getFullYear(), 0, 1);

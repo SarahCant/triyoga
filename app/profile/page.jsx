@@ -1,3 +1,4 @@
+//SARAH
 import { auth, signOut } from "../auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";

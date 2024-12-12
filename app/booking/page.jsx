@@ -1,10 +1,5 @@
 import Image from "next/image";
-// import { Suspense, lazy } from "react";
-//import LoadingCalendar from "../components/LoadingCalendar";
 import Calendar from "../components/Calendar";
-
-// Lazy load the Calendar component
-//const Calendar = lazy(() => import("../components/Calendar"));
 
 export default async function Booking() {
   const response = await fetch(

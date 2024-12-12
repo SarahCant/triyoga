@@ -1,3 +1,5 @@
+//FUNCTIONALITY: SARAH + SOFIE
+//SOFIE: STYLING + ADDED AUTH + REDIRECT TO PROFILE AFTER SIGN-UP
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 import { auth, signIn } from "../auth";
