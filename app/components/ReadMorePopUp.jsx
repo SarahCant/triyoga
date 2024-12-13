@@ -1,8 +1,20 @@
 //SARAH
 "use client";
 import Image from "next/image";
+import PopUp from "./PopUp";
+import { useState } from "react";
 
 export default function ReadMorePopUp({ selectedClass, modalType, onClose }) {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false);
+  };
+
   if (!selectedClass || modalType !== "Læs") return null;
 
   //close popup on clicks outside of it
@@ -80,7 +92,28 @@ export default function ReadMorePopUp({ selectedClass, modalType, onClose }) {
 
           <div className="md:col-start-1"></div>
           <div className="py-6 flex justify-around md:py-0">
-            <button className="btns">Læs mere</button>
+            <button onClick={handleOpenPopup} className="btns">
+              Læs mere
+            </button>
+            <PopUp
+              popUpContent={
+                <>
+                  <div className="flex flex-col items-center my-16 text-center">
+                    <div className="w-4/5 flex flex-col items-center">
+                      <p className="text-base leading-7">
+                        Tak for interessen! Denne funktionalitet er ikke oppe at
+                        køre endnu. <br /> Hav en god dag!
+                      </p>
+                      <button onClick={handleClosePopup} className="btns mt-10">
+                        Luk
+                      </button>
+                    </div>
+                  </div>
+                </>
+              }
+              isVisible={isPopupVisible}
+              onClose={handleClosePopup}
+            />
             <button
               className="btns "
               onClick={() => {
