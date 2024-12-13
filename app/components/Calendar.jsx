@@ -189,7 +189,7 @@ export default function Calendar() {
                 <h3
                   className={`font-semibold p-2 ${
                     dateString === today
-                      ? "text-[color:--main] px-6 pb-0 border-b-2 border-[color:--main]"
+                      ? "text-[color:--main] px-6 pb-0 mb-1.5 border-b-2 border-[color:--main] "
                       : ""
                   }`}
                 >
