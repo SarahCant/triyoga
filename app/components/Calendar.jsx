@@ -244,6 +244,7 @@ export default function Calendar() {
           selectedClass={selectedClass}
           modalType={modalType}
           onClose={() => setSelectedClass(null)}
+          team={selectedClass}
         />
       )}
     </section>

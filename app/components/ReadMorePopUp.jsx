@@ -3,8 +3,14 @@
 import Image from "next/image";
 import PopUp from "./PopUp";
 import { useState } from "react";
+import Link from "next/link";
 
-export default function ReadMorePopUp({ selectedClass, modalType, onClose }) {
+export default function ReadMorePopUp({
+  selectedClass,
+  modalType,
+  onClose,
+  team,
+}) {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleOpenPopup = () => {
@@ -114,15 +120,9 @@ export default function ReadMorePopUp({ selectedClass, modalType, onClose }) {
               isVisible={isPopupVisible}
               onClose={handleClosePopup}
             />
-            <button
-              className="btns "
-              onClick={() => {
-                setSelectedClass(c);
-                setModalType("Book");
-              }}
-            >
+            <Link href={`/booking/${team.id}`} className="btns">
               Book
-            </button>
+            </Link>
           </div>
         </div>
       </section>
