@@ -1,4 +1,5 @@
 //SARAH
+//SOFIE FINAL STYLING
 import { auth, signOut } from "../auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -49,50 +50,58 @@ export default async function ProfilePage() {
     <main className="md:pt-10">
       <h1 className="mb-8">Min profil</h1>
       <div className="border-x-8 border-[color:--main] md:mx-20">
-        <div className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975]">
+        <div className="bg-[color:#F9DDC3] py-7 px-8 border-x-8 border-[color:#769975]">
           <p className="leading-7">
-            <strong>Velkommen til {user.firstname}</strong>, <br />
+            <span className="font-bold">Velkommen til {user.firstname}</span>,
+            <br />
             &quot;Min Profil&quot; er ikke helt færdig endnu - men vi takker dig
-            for din interesse! Her vil du kunne danne dig et overblik over
-            tilmeldte hold, redigere i dine tilmeldinger og opdatere dine
-            kontaktinformationer. <br />
-            Indtil da kan du se din holdoversigt, logge ud eller eventuelt
-            navigere dig frem til en af de følgende sider:
+            for din interesse! <br /> Her vil du kunne danne dig et overblik
+            over tilmeldte hold, redigere i dine tilmeldinger og opdatere dine
+            kontaktinformationer. Indtil da kan du se din holdoversigt, logge ud
+            eller eventuelt navigere dig frem til en af de følgende sider:
           </p>
         </div>
       </div>
 
-      {/* display booked teams */}
-      <div className="pt-8">
-        <h3>Tilmeldte hold:</h3>
-        {bookedTeams.length > 0 ? (
-          <p>
-            {bookedTeams.map((team, index) =>
-              team ? (
-                <p key={index}>
-                  <strong>{team.name}: </strong>
-                  {capitalizeFirstLetter(team.day)}e kl. {team.startTime} -{" "}
-                  {team.endTime}, uge {getWeekNumber(team.startDate)}-
-                  {getWeekNumber(team.endDate)}. {team.niveau}.
-                </p>
-              ) : null
-            )}
-          </p>
-        ) : (
-          <p>Du har ikke tilmeldt dig nogen hold endnu.</p>
-        )}
-      </div>
-
       <div className="pt-8 flex justify-center gap-6">
-        <button className="btns btn-cancel" onClick={handleSignOut}>
-          Log ud
-        </button>
         <Link href="/">
           <button className="btns">Forside</button>
         </Link>
         <Link href="/booking">
           <button className="btns">Booking</button>
         </Link>
+      </div>
+
+      {/* display booked teams */}
+      <div className="pt-10 md:mx-20">
+        <h3 className="font-bold">Tilmeldte hold:</h3>
+        {bookedTeams.length > 0 ? (
+          <div>
+            {bookedTeams.map((team, index) =>
+              team ? (
+                <p
+                  key={index}
+                  style={{ backgroundColor: team.color }}
+                  className="p-5 my-3"
+                >
+                  <span className="font-bold">{team.name}: </span>
+                  {capitalizeFirstLetter(team.day)}e kl. {team.startTime} -{" "}
+                  {team.endTime}, uge {getWeekNumber(team.startDate)}-
+                  {getWeekNumber(team.endDate)}. {team.niveau}.
+                  <br />
+                </p>
+              ) : null
+            )}
+          </div>
+        ) : (
+          <p>Du har ikke tilmeldt dig nogen hold endnu.</p>
+        )}
+      </div>
+
+      <div className="pt-12 flex justify-center gap-6">
+        <button className="btns btn-cancel" onClick={handleSignOut}>
+          Log ud
+        </button>
       </div>
     </main>
   );

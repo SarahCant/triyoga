@@ -1,4 +1,5 @@
 //SARAH
+//SOFIE FINAL STYLING
 "use client";
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -122,32 +123,37 @@ export default function YourBooking({ params }) {
     <main className="md:pt-12 min-h-screen">
       <h1>Din booking</h1>
       <p className="pb-4 text-center">
-        Du er i gang med at tilmelde dig følgende hold
+        Du er i gang med at tilmelde dig følgende hold:
       </p>
       <div className="border-x-8 border-[color:--main] md:mx-20">
-        <article className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975] py-6">
-          <h3>Holdnavn: {team.name}</h3>
-          <p className="leading-5">
-            Tidspunkt: {team.day}e kl.{team.startTime} - {team.endTime}, uge{" "}
-            {startWeek}-{endWeek} <br />
-            Niveau: {team.niveau} <br /> <br />
-            <strong className="">Pris: {team.price}</strong>
+        <article className="bg-[color:#F9DDC3] py-7 px-8 border-x-8 border-[color:#769975]">
+          <h3>
+            <span className="font-bold">Holdnavn: </span>
+            {team.name}
+          </h3>
+          <p className="leading-7">
+            <span className="font-bold">Tidspunkt: </span>
+            {team.day}e kl.{team.startTime} - {team.endTime}, uge {startWeek}-
+            {endWeek} <br />
+            <span className="font-bold">Niveau: </span>
+            {team.niveau} <br /> <br />
+            <span className="font-bold">Pris: </span>
+            {team.price}
           </p>
           <p className="py-4 leading-7">
-            <strong>Betalingsinformation</strong> <br />
-            Vi tilbyder mulighed for betaling via <strong>
-              MobilePay
-            </strong>{" "}
-            eller <strong>kontant</strong> ved første undervisningsgang.
-            Betalingen skal være på plads inden for den første
-            undervisningstime, og vi opfordrer til, at du medbringer enten
-            kontanter eller har MobilePay klar til at gennemføre betalingen.
-            Hvis du har spørgsmål eller ønsker yderligere information om
-            betalingsmulighederne, er du altid velkommen til at kontakte os
-            enten på mobil eller på mail.
+            <span className="font-bold">Betalingsinformation</span> <br />
+            Vi tilbyder mulighed for betaling via
+            <span className="font-bold"> MobilePay </span>
+            eller <span className="font-bold"> kontant </span>ved første
+            undervisningsgang. Betalingen skal være på plads inden for den
+            første undervisningstime, og vi opfordrer til, at du medbringer
+            enten kontanter eller har MobilePay klar til at gennemføre
+            betalingen. Hvis du har spørgsmål eller ønsker yderligere
+            information om betalingsmulighederne, er du altid velkommen til at
+            kontakte os enten på mobil eller på mail.
           </p>
 
-          <div className="text-xs flex flex-col w-7/12 m-auto gap-6 pt-4 md:flex-row">
+          <div className="text-sm flex flex-col items-center w-7/12 m-auto mb-2 gap-6 pt-4 md:flex-row md:justify-center">
             <Link href={"/booking"} className="btns text-center">
               Tilbage til kalender
             </Link>

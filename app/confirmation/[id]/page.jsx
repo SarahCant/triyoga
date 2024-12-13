@@ -1,4 +1,5 @@
 //SARAH
+//SOFIE FINAL STYLING
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -39,29 +40,31 @@ export default function Confirm({ params }) {
   const endWeek = getWeekNumber(team.endDate);
 
   return (
-    <main className="flex flex-col items-center text-center">
+    <main className="flex flex-col items-center text-center mt-36">
       <div className="leading-snug mt-8">
-        <h1>Booking bekræftigelse</h1>
-        <p>Tillykke! Du er nu tilmeldt:</p>
+        <h1>Bookingbekræftelse</h1>
+        <p className="text-base py-3">Tillykke! Du er nu tilmeldt:</p>
       </div>
 
-      <p className="my-4">
-        <strong>
+      <p className="my-4 text-base leading-9">
+        <span className="font-bold">
           Holdnavn: {team.name} <br />
-        </strong>
-        Tidspunkt: {team.day}e kl. {team.startTime} - {team.endTime}, uge{" "}
-        {startWeek}-{endWeek} <br />
-        Niveau: {team.niveau} <br />
-        Du kan se dine tilmeldte hold under
+        </span>
+        <span className="font-bold">Tidspunkt: </span>
+        {team.day}e kl. {team.startTime} - {team.endTime}, uge {startWeek}-
+        {endWeek} <br />
+        <span className="font-bold">Niveau: </span>
+        {team.niveau} <br />
+        Du kan se dine tilmeldte hold under:
       </p>
 
-      <div className="flex flex-col md:flex-row gap-4 font-thin md:font-normal">
+      <div className="flex flex-col gap-4 font-thin md:font-normal -mb-4">
         <Link href="/profile">
-          <button className="btns">Min profil</button>
+          <button className="btns mt-1">Min profil</button>
         </Link>
         <Link href="/booking">
-          <button className="btns">Tilbage til kalender</button>
-        </Link>{" "}
+          <button className="btns mt-6">Tilbage til kalender</button>
+        </Link>
       </div>
     </main>
   );
