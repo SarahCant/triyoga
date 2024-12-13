@@ -52,8 +52,6 @@ export default function SignInForm({ signInAction }) {
 
         {state?.message && <p className="error-message">{state.message}</p>}
       </form>
-
-      {/* knap til opret bruger/tilbage knap */}
     </section>
   );
 }

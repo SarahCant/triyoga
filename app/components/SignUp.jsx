@@ -6,6 +6,7 @@ import { useActionState, signUpAction } from "react";
 
 export default function SignUp({ signUpAction }) {
   const [state, formAction] = useActionState(signUpAction, {});
+
   return (
     <section id="sign-up" className="page">
       <form id="sign-up-form" action={formAction}>

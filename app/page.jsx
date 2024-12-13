@@ -7,12 +7,14 @@ import PopUp from "./components/PopUp";
 import { useState } from "react";
 
 export default function Home() {
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false); // Initially hide PopUp
 
+  // Open PopUp
   const handleOpenPopup = () => {
     setIsPopupVisible(true);
   };
 
+  // Close PopUp
   const handleClosePopup = () => {
     setIsPopupVisible(false);
   };
@@ -21,7 +23,6 @@ export default function Home() {
     <>
       {/* Hero section */}
       <section className="hero justify-center sm:flex-row items-center mt-12 md:mt-24">
-        {/* indsæt hero img med Image */}
         <Image
           src="/img/fp-hero.png"
           height={4000}
@@ -87,6 +88,7 @@ export default function Home() {
             </h2>
           </div>
         </div>
+
         {/* About TriYoga and Vilhemlsborg */}
         <section className="flex justify-center text-center items-center md:pb-10">
           <div className="w-4/5 flex flex-col items-center md:flex-row md:items-start">
@@ -119,6 +121,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         {/* Content divider */}
         <div className="flex items-center justify-center w-full">
           <span className="bg-[color:--main] block h-0.5 w-full"></span>
@@ -131,6 +134,7 @@ export default function Home() {
           />
           <span className="bg-[color:--main] block h-0.5 w-full"></span>
         </div>
+
         {/* Notice Board with upcomming events */}
         <section className="flex flex-col items-center text-center pb-20">
           <div className="w-4/5">
@@ -153,6 +157,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         {/* Stretch of the week */}
         <section className="bg-[#F9DDC3] flex justify-center text-center items-center relative">
           <div className="w-4/5 flex flex-col items-center pt-4">
@@ -191,6 +196,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         {/* Newsletter */}
         <section className="flex justify-center text-center items-center">
           <div className="w-4/5 flex flex-col items-center pt-8">
@@ -239,6 +245,7 @@ export default function Home() {
             />
           </div>
         </section>
+
         {/* SoMe photos */}
         <section className="flex justify-center text-center items-center pt-10">
           <div className="w-4/5 flex flex-col items-center pt-12">

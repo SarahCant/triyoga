@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="my-28 md:mt-52 md:mb-44 flex flex-col items-center text-center">
+    <section className="my-28 md:mt-52 md:mb-44 flex flex-col items-center text-center">
       <div className="w-4/5">
         <div className="flex justify-center">
           <Image src="/img/logo.png" width={50} height={50} alt="Logo" />
@@ -20,6 +20,6 @@ export default function NotFound() {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

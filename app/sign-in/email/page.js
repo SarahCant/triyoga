@@ -8,11 +8,12 @@ import Image from "next/image";
 
 export default async function SignIn() {
   const session = await auth();
-  // if the user is already signed in, redirect them to the profile page
+  // If the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
 
+  // Handle sign in
   async function handleSignInWithEmailAndPassword(currentState, formData) {
     "use server";
     try {
@@ -21,16 +22,19 @@ export default async function SignIn() {
       const password = formData.get("password");
       console.log(email, password);
 
+      // Checks for correct credentials
       await signIn("credentials", { email, password });
     } catch (error) {
       console.log(error);
 
+      // Redirect to profile when correct
       redirect("/profile");
     }
   }
 
   return (
     <main id="sign-in-page" className="page">
+      {/* Go back arrow */}
       <Link href="/sign-in">
         <div className="flex mt-36">
           <Image
@@ -43,6 +47,8 @@ export default async function SignIn() {
           <p className="text-[color:--main] text-base">Tilbage</p>
         </div>
       </Link>
+
+      {/* Sign in section */}
       <section className="my-8">
         <h1>Log ind</h1>
         <SignInForm signInAction={handleSignInWithEmailAndPassword} />

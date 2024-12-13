@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function Gallery() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Slide content objects
   const slides = [
     {
       bgImage: "/img/fp-nb-1.png",
@@ -39,20 +40,24 @@ export default function Gallery() {
     },
   ];
 
+  // Logic for changing to the next slide at btn onlick
   const nextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
 
+  // Logic for changing to the previous slide at btn onclick
   const prevSlide = () => {
     setCurrentSlide(
       (prevSlide) => (prevSlide - 1 + slides.length) % slides.length
     );
   };
 
+  // Logic for changing slides selectively at onlick on circles
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 
+  // Timer on slide change
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
@@ -63,6 +68,7 @@ export default function Gallery() {
 
   return (
     <div className="flex flex-col">
+      {/* Arrow-btn left, previous */}
       <div className="flex items-center">
         <button onClick={prevSlide} className="transform -translate-y-1/2">
           <Image
@@ -73,6 +79,7 @@ export default function Gallery() {
           />
         </button>
 
+        {/* Notice Board content */}
         <div className="w-full h-[400px] relative mx-4 md:h-[300px]">
           {slides.map((slide, index) => (
             <div
@@ -102,6 +109,7 @@ export default function Gallery() {
           ))}
         </div>
 
+        {/* Arrow-btn right, next */}
         <button
           onClick={nextSlide}
           className=" top-1/2 -right-14 transform -translate-y-1/2"
@@ -116,6 +124,7 @@ export default function Gallery() {
         </button>
       </div>
 
+      {/* Circle slide-navigation btns */}
       <div className="flex justify-center space-x-2 mt-4 relative z-10">
         {slides.map((_, index) => (
           <button
