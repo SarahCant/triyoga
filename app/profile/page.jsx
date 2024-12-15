@@ -1,5 +1,5 @@
 //SARAH
-//SOFIE FINAL STYLING
+//SOFIE FINAL STYLING ON MD SCREENS
 import { auth, signOut } from "../auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";

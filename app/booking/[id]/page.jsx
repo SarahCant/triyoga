@@ -1,5 +1,5 @@
 //SARAH
-//SOFIE FINAL STYLING
+//SOFIE FINAL STYLING ON MD SCREENS
 "use client";
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
