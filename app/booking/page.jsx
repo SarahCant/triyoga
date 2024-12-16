@@ -5,9 +5,10 @@ import Calendar from "../components/Calendar";
 export default async function Booking() {
   const response = await fetch(
     "https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams.json"
-  ); // fetch data from Firebase
+  ); //fetch data from Firebase
 
-  const dataObject = await response.json(); // convert response to JSON object
+  //convert response to JSON object
+  const dataObject = await response.json();
 
   const teams = Object.keys(dataObject).map((key) => {
     return {
@@ -22,7 +23,7 @@ export default async function Booking() {
         <h1 className="pb-4">Booking</h1>
         {/* outer border */}
         <div className="border-x-8 border-[color:--main] md:mx-20">
-          {/* text section */}
+          {/* inner border + text section */}
           <div className="bg-[color:#F9DDC3] p-2 border-x-8 border-[color:#769975]">
             <p className="leading-7">
               <strong>I kalenderen nedenfor, </strong>
@@ -84,7 +85,7 @@ export default async function Booking() {
           </div>
         </div>
       </main>
-      {/* Calendar */}
+      {/* Calendar component */}
       <h1 className="mt-8 mb-3">Kalender</h1>
       <Calendar />
     </div>

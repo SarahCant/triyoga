@@ -21,6 +21,7 @@ export default function ReadMorePopUp({
     setIsPopupVisible(false);
   };
 
+  //only show if modal type = "Læs"
   if (!selectedClass || modalType !== "Læs") return null;
 
   //close popup on clicks outside of it
@@ -35,7 +36,7 @@ export default function ReadMorePopUp({
     ? selectedClass.day.charAt(0).toUpperCase() + selectedClass.day.slice(1)
     : "";
 
-  //calculate week no. from dates
+  //calculate week number from dates
   function getWeekNumber(date) {
     const currentDate = new Date(date);
     const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
@@ -101,6 +102,7 @@ export default function ReadMorePopUp({
             <button onClick={handleOpenPopup} className="btns">
               Læs mere
             </button>
+            {/* thank you for your interest pop-up */}
             <PopUp
               popUpContent={
                 <>
@@ -120,6 +122,7 @@ export default function ReadMorePopUp({
               isVisible={isPopupVisible}
               onClose={handleClosePopup}
             />
+            {/* redirect to unique booking/team ID */}
             <Link href={`/booking/${team.id}`} className="btns">
               Book
             </Link>

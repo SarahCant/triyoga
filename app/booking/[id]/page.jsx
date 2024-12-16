@@ -1,5 +1,5 @@
-//SARAH
-//SOFIE FINAL STYLING ON MD SCREENS
+//SARAH FUNCTIONALITY + GENERAL STYLING
+//SOFIE DETAIL STYLING ON MD SCREENS
 "use client";
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
 import { useRouter } from "next/navigation";
 
+//get and use unique params
 export default function YourBooking({ params }) {
   const { id } = params;
   const [team, setTeam] = useState(null);
@@ -14,6 +15,7 @@ export default function YourBooking({ params }) {
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  //check for sign-in
   useEffect(() => {
     async function checkSession() {
       const session = await getSession();
@@ -27,6 +29,7 @@ export default function YourBooking({ params }) {
     checkSession();
   }, [router]);
 
+  //fetch teams
   useEffect(() => {
     async function fetchTeam() {
       try {
@@ -53,17 +56,18 @@ export default function YourBooking({ params }) {
     return <p>Loading...</p>;
   }
 
+  //get week numbers
   const startWeek = getWeekNumber(team.startDate);
   const endWeek = getWeekNumber(team.endDate);
 
   const handleBookingConfirmation = async () => {
     if (!user || !user.email) {
-      setError("User not authenticated. Please sign in.");
+      setError("Det ligner ikke, at du har en profil. Opret en før du booker.");
       return;
     }
 
     try {
-      // Update team's currentParticipants
+      //update team's currentParticipants
       const updateResponse = await fetch(
         `https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams/${id}.json`,
         {
@@ -79,7 +83,7 @@ export default function YourBooking({ params }) {
         throw new Error("Failed to update booking.");
       }
 
-      // Fetch user data to get the unique ID
+      //fetch user data to get the unique ID
       const userFetchResponse = await fetch(
         `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users.json?orderBy="email"&equalTo="${user.email}"`
       );
@@ -95,7 +99,7 @@ export default function YourBooking({ params }) {
         throw new Error("User not found in database.");
       }
 
-      // Update user's booked field with team ID
+      //update user's booked field with team ID
       const userUpdateResponse = await fetch(
         `https://triyoga-bbaf1-default-rtdb.firebaseio.com/users/${userId}.json`,
         {
@@ -103,7 +107,7 @@ export default function YourBooking({ params }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             booked: userData[userId].booked
-              ? `${userData[userId].booked}, ${id}` // Store the team ID instead of name
+              ? `${userData[userId].booked}, ${id}` //store team ID instead of name
               : id,
           }),
         }
@@ -160,7 +164,7 @@ export default function YourBooking({ params }) {
             <button
               className="btns"
               onClick={(e) => {
-                e.preventDefault(); // Prevent default button behavior
+                e.preventDefault(); //prevent default btn behavior
                 handleBookingConfirmation();
               }}
             >

@@ -10,12 +10,12 @@ import Link from "next/link";
 
 export default async function SignIn() {
   const session = await auth();
-  // If the user is already signed in, redirect them to the profile page
+  //if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
 
-  // Handle sign up, get form inputs
+  //handle sign up, get form inputs
   async function handleSignUpWithEmailAndPassword(currentState, formData) {
     "use server";
     const firstname = formData.get("firstname");
@@ -23,10 +23,10 @@ export default async function SignIn() {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    // Check if the user already exists in database
+    //check if the user already exists in database
     const user = await getUserByMail(email);
 
-    // Message if the user already exists
+    //message if the user already exists
     if (user) {
       return {
         message: "Der findes allerede en bruger med denne mail ",
@@ -36,11 +36,11 @@ export default async function SignIn() {
       };
     }
 
-    // Hash the password
-    const salt = await bcrypt.genSalt(10); // Generate a salt
-    const hashedPassword = await bcrypt.hash(password, salt); // Hash the password
+    //hash the password
+    const salt = await bcrypt.genSalt(10); // gnerate a salt
+    const hashedPassword = await bcrypt.hash(password, salt); //hash the password
 
-    // Create user
+    //create user
     const newUser = await createUser({
       firstname,
       lastname,

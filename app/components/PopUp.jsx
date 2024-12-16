@@ -3,9 +3,9 @@
 import Image from "next/image";
 
 export default function PopUp({ popUpContent, isVisible, onClose }) {
-  if (!isVisible) return null; // Don't render if not visible
+  if (!isVisible) return null; //don't render if not visible
 
-  // Close PopUp when onclick on backdrop
+  //close PopUp when onclick on backdrop
   const handleBackdropClick = (e) => {
     if (e.target.id === "backdrop") {
       onClose();

@@ -9,14 +9,14 @@ export default async function SignIn() {
   const session = await auth();
   console.log(session);
 
-  // If the user is already signed in, redirect them to the profile page
+  //if user is already signed in, redirect them to profile page
   if (session) {
     redirect("/profile");
   }
 
   return (
     <main id="sign-in-page" className="page">
-      {/* Log in or create user options */}
+      {/* log-in or create user  */}
       <section className="flex flex-col items-center my-44">
         <h1>Log ind / Opret profil</h1>
         <p className="text-base mt-5 mb-14 text-center">

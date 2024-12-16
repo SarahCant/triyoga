@@ -1,5 +1,5 @@
-//SARAH
-//SOFIE FINAL STYLING ON MD SCREENS
+//SARAH FUNCTIONALITY + GENERAL STYLING
+//SOFIE DETAIL STYLING ON MD SCREENS
 import { auth, signOut } from "../auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { getWeekNumber } from "../components/CalculateWeekNumber";
 
 export default async function ProfilePage() {
   const session = await auth();
-
+  //check for sign in
   if (!session) {
     redirect("/sign-in");
   }
@@ -41,7 +41,7 @@ export default async function ProfilePage() {
     redirect("/");
   }
 
-  //capitalize the first letter of team.day
+  //capitalise first letter of team.day
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -50,7 +50,7 @@ export default async function ProfilePage() {
     <main className="md:pt-10">
       <h1 className="mb-8">Min profil</h1>
       <div className="border-x-8 border-[color:--main] md:mx-20">
-        <div className="bg-[color:#F9DDC3] py-7 px-8 border-x-8 border-[color:#769975]">
+        <article className="bg-[color:#F9DDC3] py-7 px-8 border-x-8 border-[color:#769975]">
           <p className="leading-7">
             <span className="font-bold">Velkommen til {user.firstname}</span>,
             <br />
@@ -60,7 +60,7 @@ export default async function ProfilePage() {
             kontaktinformationer. Indtil da kan du se din holdoversigt, logge ud
             eller eventuelt navigere dig frem til en af de følgende sider:
           </p>
-        </div>
+        </article>
       </div>
 
       <div className="pt-8 flex justify-center gap-6">
@@ -73,7 +73,7 @@ export default async function ProfilePage() {
       </div>
 
       {/* display booked teams */}
-      <div className="pt-10 md:mx-20">
+      <section className="pt-10 md:mx-20">
         <h3 className="font-bold">Tilmeldte hold:</h3>
         {bookedTeams.length > 0 ? (
           <div>
@@ -94,9 +94,9 @@ export default async function ProfilePage() {
             )}
           </div>
         ) : (
-          <p>Du har ikke tilmeldt dig nogen hold endnu.</p>
+          <p>Du har ikke tilmeldt dig et hold endnu.</p>
         )}
-      </div>
+      </section>
 
       <div className="pt-12 flex justify-center gap-6">
         <button className="btns btn-cancel" onClick={handleSignOut}>

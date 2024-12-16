@@ -1,15 +1,17 @@
-//SARAH
-//SOFIE FINAL STYLING ON MD SCREENS
+//SARAH FUNCTIONALITY + GENERAL STYLING
+//SOFIE DETAIL STYLING ON MD SCREENS
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
 
+//get and use unique params
 export default function Confirm({ params }) {
   const { id } = params;
   const [team, setTeam] = useState(null);
   const [error, setError] = useState(null);
 
+  //get fetched team's info from firebase
   useEffect(() => {
     async function fetchTeam() {
       try {
@@ -35,7 +37,7 @@ export default function Confirm({ params }) {
   if (!team) {
     return <p>Loading...</p>;
   }
-
+  //week numbers
   const startWeek = getWeekNumber(team.startDate);
   const endWeek = getWeekNumber(team.endDate);
 

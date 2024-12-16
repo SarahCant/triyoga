@@ -8,12 +8,12 @@ import Image from "next/image";
 
 export default async function SignIn() {
   const session = await auth();
-  // If the user is already signed in, redirect them to the profile page
+  //if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
 
-  // Handle sign in
+  //handle sign in
   async function handleSignInWithEmailAndPassword(currentState, formData) {
     "use server";
     try {
@@ -22,12 +22,12 @@ export default async function SignIn() {
       const password = formData.get("password");
       console.log(email, password);
 
-      // Checks for correct credentials
+      //checks for correct credentials
       await signIn("credentials", { email, password });
     } catch (error) {
       console.log(error);
 
-      // Redirect to profile when correct
+      //redirect to profile when correct
       redirect("/profile");
     }
   }

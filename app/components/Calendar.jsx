@@ -14,15 +14,17 @@ export default function Calendar() {
   const [modalType, setModalType] = useState(null);
   const [teams, setTeams] = useState([]);
 
+  //calculate week dates
   const calculateWeekDates = (date) => {
     const monday = new Date(date);
-    const day = monday.getDay() || 7; // Mon is 1, Sun is 7
+    const day = monday.getDay() || 7; //Mon = 1, Sun = 7
     if (day !== 1) monday.setDate(monday.getDate() - day + 1);
     const sunday = new Date(monday);
-    sunday.setDate(monday.getDate() + 6); // Sun = Mon + 6
+    sunday.setDate(monday.getDate() + 6); //Sun = Mon + 6
     return { startOfWeek: monday, endOfWeek: sunday };
   };
 
+  //fetch teams from firebase
   const fetchTeams = async () => {
     const response = await fetch(
       "https://triyoga-bbaf1-default-rtdb.firebaseio.com/teams.json"
@@ -39,6 +41,7 @@ export default function Calendar() {
     const startOfWeekDate = new Date(startOfWeek);
     const endOfWeekDate = new Date(endOfWeek);
 
+    //map and filter fetched teams
     const fetchedTeams = Object.keys(dataObject)
       .map((key) => ({
         id: key,
@@ -104,6 +107,7 @@ export default function Calendar() {
     setWeek(expandedClasses);
   };
 
+  //week navigation
   const navigateWeek = (direction) => {
     const newDate = new Date(currentWeek);
     newDate.setDate(currentWeek.getDate() + direction * 7);
@@ -125,10 +129,12 @@ export default function Calendar() {
     return Math.ceil(((tempDate - yearStart) / 86400000 + 1) / 7);
   };
 
+  //find today's date
   const today = new Date().toISOString().split("T")[0];
 
   return (
     <section className="w-10/12 mx-auto my-11">
+      {/* top section */}
       <button
         onClick={() => setCurrentWeek(new Date())}
         className="text-lg underline text-[color:#814F26] font-bold"
@@ -137,6 +143,7 @@ export default function Calendar() {
       </button>
       <div className="border-2 border-[color:#814F26]">
         <div className="flex items-center text-xs md:text-base justify-between bg-[color:#F6B485] bg-opacity-60 p-4 border-b-2 border-[color:#814F26]">
+          {/* week navigation */}
           <button onClick={() => navigateWeek(-1)}>
             <Image
               src="/img/icons/arrow-brown.png"
@@ -166,7 +173,7 @@ export default function Calendar() {
             Næste uge
           </button>
         </div>
-
+        {/* day display + current day highlight */}
         <div className="grid md:grid-cols-7 divide-y-4 md:divide-x md:divide-y-0 divide-[color:#814F26] text-center">
           {[
             "Mandag",
@@ -195,6 +202,7 @@ export default function Calendar() {
                 >
                   {day}
                 </h3>
+                {/* main section, display teams */}
                 {teams
                   .filter((team) => team.day === day.toLowerCase())
                   .map((team) => (
