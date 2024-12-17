@@ -53,6 +53,7 @@ export default async function SignIn() {
       await signIn("credentials", {
         email: email,
         password: password,
+        redirect: false,
       });
 
       // Check if authentication was successful
@@ -61,6 +62,8 @@ export default async function SignIn() {
         redirect("/profile");
       }
     }
+
+    redirect("/profile");
   }
 
   return (
