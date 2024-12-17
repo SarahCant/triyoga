@@ -4,12 +4,19 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getWeekNumber } from "@/app/components/CalculateWeekNumber";
+import { useRouter } from "next/compat/router";
 
 //get and use unique params
 export default function Confirm({ params }) {
+  const router = useRouter();
   const { id } = params;
   const [team, setTeam] = useState(null);
   const [error, setError] = useState(null);
+
+  //force /profile reload on navigation
+  const handleReload = () => {
+    router.reload();
+  };
 
   //get fetched team's info from firebase
   useEffect(() => {
@@ -61,9 +68,10 @@ export default function Confirm({ params }) {
       </p>
 
       <div className="flex flex-col gap-4 font-thin md:font-normal -mb-4">
-        <Link href="/profile">
-          <button className="btns mt-1">Min profil</button>
-        </Link>
+        <button className="btns mt-1" onClick={handleReload}>
+          <Link href="/profile">Min profil</Link>
+        </button>
+
         <Link href="/booking">
           <button className="btns mt-6">Tilbage til kalender</button>
         </Link>
